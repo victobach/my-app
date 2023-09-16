@@ -6,17 +6,15 @@ const navController = (navigation, route) => {
   navigation.navigate(route);
 };
 
-export default function Screen2({ navigation }) {
+export default function Filter({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Button
-        title="go to screen 1"
-        onPress={() => navController(navigation, "Screen1")}
+        title="All Venues"
+        onPress={() => navController(navigation, "AllVenues")}
       />
-      <Button title="Tilbage" onPress={() => navigation.goBack()} />
-      <Text>Screen2</Text>
-
-      <Text>vilkårligt indhold</Text>
+      <Button title="Back" onPress={() => navigation.goBack()} />
+      <Text>Filters shown here</Text>
     </View>
   );
 }

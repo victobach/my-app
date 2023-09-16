@@ -2,10 +2,10 @@ import * as React from "react";
 
 import { Text, View } from "react-native";
 
-export default function HomeScreen() {
+export default function Profile() {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Hjem!</Text>
+      <Text>My Profile</Text>
 
       <Text>vilkårligt indhold</Text>
     </View>
