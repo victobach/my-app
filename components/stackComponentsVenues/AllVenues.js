@@ -13,7 +13,10 @@ export default function AllVenues({ navigation }) {
         title="Filter"
         onPress={() => navController(navigation, "Filter")}
       />
-      <Button title="Back" onPress={() => navigation.goBack()} />
+      <Button
+        title="Venue Map"
+        onPress={() => navController(navigation, "Venues")}
+      />
       <Text>All Venues will be shown here</Text>
     </View>
   );

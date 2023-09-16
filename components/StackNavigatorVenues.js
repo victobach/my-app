@@ -8,8 +8,8 @@ const Stack = createStackNavigator();
 function StackNavigatorVenues() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Venues" component={Venues} />
       <Stack.Screen name="All Venues" component={AllVenues} />
+      <Stack.Screen name="Venues" component={Venues} />
       <Stack.Screen name="Filter" component={Filter} />
     </Stack.Navigator>
   );
