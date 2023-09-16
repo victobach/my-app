@@ -5,7 +5,7 @@ const navController = (navigation, route) => {
   navigation.navigate(route);
 };
 
-export default function myProfile({ navigation }) {
+export default function MyProfile({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Button

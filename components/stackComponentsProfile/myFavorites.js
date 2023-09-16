@@ -5,7 +5,7 @@ const navController = (navigation, route) => {
   navigation.navigate(route);
 };
 
-export default function myFavorites({ navigation }) {
+export default function MyFavorites({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Button title="Back" onPress={() => navigation.goBack()} />
