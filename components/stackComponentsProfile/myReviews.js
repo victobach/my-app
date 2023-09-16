@@ -5,7 +5,7 @@ const navController = (navigation, route) => {
   navigation.navigate(route);
 };
 
-export default function myReviews({ navigation }) {
+export default function MyReviews({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Button title="Back" onPress={() => navigation.goBack()} />
