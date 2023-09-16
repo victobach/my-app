@@ -3,16 +3,11 @@ import * as React from "react";
 import { Text, View } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
-
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import StackNavigatorVenues from "./components/StackNavigatorVenues";
-
-import Venues from "./components/stackComponentsVenues/Venues";
-
 import SettingsScreen from "./components/SettingsScreen";
 import Premium from "./components/Premium";
-import Profile from "./components/Profile";
+import StackNavigatorProfile from "./components/StackNavigatorProfile";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +17,7 @@ export default function App() {
       <Tab.Navigator>
         <Tab.Screen name="Venues Map" component={StackNavigatorVenues} />
 
-        <Tab.Screen name="Profile" component={Profile} />
+        <Tab.Screen name="Profile" component={StackNavigatorProfile} />
 
         <Tab.Screen name="Premium" component={Premium} />
 
