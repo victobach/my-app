@@ -11,7 +11,7 @@ import StackNavigatorVenues from "./components/StackNavigatorVenues";
 import Venues from "./components/stackComponentsVenues/Venues";
 
 import SettingsScreen from "./components/SettingsScreen";
-import DetailsScreen from "./components/DetailsScreen";
+import Premium from "./components/Premium";
 import Profile from "./components/Profile";
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +24,7 @@ export default function App() {
 
         <Tab.Screen name="Profile" component={Profile} />
 
-        <Tab.Screen name="Detaljer" component={DetailsScreen} />
+        <Tab.Screen name="Premium" component={Premium} />
 
         <Tab.Screen name="Settings" component={SettingsScreen} />
       </Tab.Navigator>
