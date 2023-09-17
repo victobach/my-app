@@ -9,7 +9,6 @@ import SettingsScreen from "./components/SettingsScreen";
 import Premium from "./components/Premium";
 import StackNavigatorProfile from "./components/StackNavigatorProfile";
 import Venues from "./components/stackComponentsVenues/Venues";
-import DetailsScreen from "./components/DetailsScreen";
 import Profile from "./components/Profile";
 
 
