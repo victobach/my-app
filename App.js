@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import { Text, View } from "react-native";
 
 import { NavigationContainer } from "@react-navigation/native";
@@ -9,9 +8,6 @@ import SettingsScreen from "./components/SettingsScreen";
 import Premium from "./components/Premium";
 import StackNavigatorProfile from "./components/StackNavigatorProfile";
 import Venues from "./components/stackComponentsVenues/Venues";
-import Profile from "./components/Profile";
-
-
 
 
 const Tab = createBottomTabNavigator();
