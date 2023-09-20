@@ -1,15 +1,18 @@
 import * as React from "react";
 
 import { Button, Text, View } from "react-native";
+
 import { initializeApp } from "firebase/app";
 
 import { getFirestore, setDoc, doc } from "firebase/firestore";
+
 
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
 
 export default function Filter({ navigation }) {
+
   //_____
   const firebaseConfig = {
     apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
@@ -30,6 +33,8 @@ export default function Filter({ navigation }) {
     });
   };
   initializeApp(firebaseConfig);
+
+
   //______
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -43,3 +48,4 @@ export default function Filter({ navigation }) {
     </View>
   );
 }
+
