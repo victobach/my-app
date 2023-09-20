@@ -1,7 +1,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import MyFavorites from "./stackComponentsProfile/myFavorites";
+import MyFavorites from "./stackComponentsProfile/MyFavorites"
 import MyProfile from "./stackComponentsProfile/myProfile";
-import MyReviews from "./stackComponentsProfile/myReviews";
+import MyReviews from "./stackComponentsProfile/MyReviews";
 
 const Stack = createStackNavigator();
 
