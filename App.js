@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import StackNavigatorVenues from "./components/StackNavigatorVenues";
 import SettingsScreen from "./components/SettingsScreen";
 import Premium from "./components/Premium";
+import ClubOwner from "./components/ClubOwner";
 import StackNavigatorProfile from "./components/StackNavigatorProfile";
 import Venues from "./components/stackComponentsVenues/Venues";
 
