@@ -1,16 +1,16 @@
-import * as React from "react";
-
-import { Button, Text, View } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, Button } from "react-native";
 import { initializeApp } from "firebase/app";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
-
 
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
 
 export default function Filter({ navigation }) {
-  //_____
+  const [venuePlace, setVenuePlace] = useState("");
+  const [contactInfo, setContactInfo] = useState("");
+
   const firebaseConfig = {
     apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
     authDomain: "innovationogtekt.firebaseapp.com",
@@ -35,7 +35,7 @@ export default function Filter({ navigation }) {
   };
 
   initializeApp(firebaseConfig);
-  //______
+
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <TextInput
@@ -60,4 +60,3 @@ export default function Filter({ navigation }) {
     </View>
   );
 }
-
