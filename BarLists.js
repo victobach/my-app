@@ -18,5 +18,3 @@ export const VenueList = [
 export const Area = ["København K", "København NV", "Frederiksberg"];
 
 export const GetUserURL = "https://randomuser.me/api?results=";
-
-console.log(VenueList);

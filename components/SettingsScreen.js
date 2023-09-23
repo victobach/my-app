@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
@@ -8,63 +8,82 @@ import {
   Image,
   TouchableOpacity,
   Switch,
-} from 'react-native';
-import FeatherIcon from 'react-native-vector-icons/Feather';
-
+} from "react-native";
+import FeatherIcon from "react-native-vector-icons/Feather";
 
 const SECTIONS = [
   {
-    header: 'Preferences',
+    header: "Preferences",
     items: [
-      { id: 'language', icon: 'globe', label: 'Language', type: 'select' },
-      { id: 'darkMode', icon: 'moon', label: 'Dark Mode', type: 'toggle' },
-      { id: 'wifi', icon: 'wifi', label: 'Use Wi-Fi', type: 'toggle' },
+      { id: "language", icon: "globe", label: "Language", type: "select" },
+      { id: "darkMode", icon: "moon", label: "Dark Mode", type: "toggle" },
+      { id: "wifi", icon: "wifi", label: "Use Wi-Fi", type: "toggle" },
     ],
   },
   {
-    header: 'Help',
+    header: "Help",
     items: [
-      { id: 'bug', icon: 'flag', label: 'Report Bug', type: 'link' },
-      { id: 'contact', icon: 'mail', label: 'Contact Us', type: 'link' },
-    ]
-  }
-] 
+      { id: "bug", icon: "flag", label: "Report Bug", type: "link" },
+      { id: "contact", icon: "mail", label: "Contact Us", type: "link" },
+    ],
+  },
+];
 
 export default function SettingsScreen() {
   const [form, setForm] = useState({
-    language: 'English',
+    language: "English",
     darkMode: true,
     wifi: false,
   });
 
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    avatar: "",
+  });
+
+  useEffect(() => {
+    // Fetch user data from randomuser.me API
+    fetch("https://randomuser.me/api/")
+      .then((response) => response.json())
+      .then((data) => {
+        const userData = data.results[0];
+        setUser({
+          name: `${userData.name.first} ${userData.name.last}`,
+          email: userData.email,
+          avatar: userData.picture.large,
+        });
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
 
   return (
-    <SafeAreaView style={{ backgroundColor: '#f6f6f6' }}>
+    <SafeAreaView style={{ backgroundColor: "#f6f6f6" }}>
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.header}>
           <Text style={styles.title}>Settings</Text>
-
-          <Text style={styles.subtitle}>
-          </Text>
         </View>
 
         <View style={styles.profile}>
           <Image
             alt=""
             source={{
-              uri: 'https://scontent-cph2-1.xx.fbcdn.net/v/t1.6435-9/118952811_3625038777528445_8112726578542645062_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=bpfxflA1e7MAX_-Ld2Y&_nc_ht=scontent-cph2-1.xx&oh=00_AfDgViEibgV7taHMCGkf8m2Cq0jb8-EVCj2uZD1PjjL0tg&oe=652D238A',
+              uri: user.avatar,
             }}
             style={styles.profileAvatar}
           />
 
-          <Text style={styles.profileName}>Christian Søndergaard</Text>
+          <Text style={styles.profileName}>{user.name}</Text>
 
-          <Text style={styles.profileEmail}>Csc@gmail.com</Text>
+          <Text style={styles.profileEmail}>{user.email}</Text>
 
           <TouchableOpacity
             onPress={() => {
               // handle onPress
-            }}>
+            }}
+          >
             <View style={styles.profileAction}>
               <Text style={styles.profileActionText}>Edit Profile</Text>
 
@@ -86,11 +105,13 @@ export default function SettingsScreen() {
                     style={[
                       styles.rowWrapper,
                       index === 0 && { borderTopWidth: 0 },
-                    ]}>
+                    ]}
+                  >
                     <TouchableOpacity
                       onPress={() => {
-                        // handle onPress
-                      }}>
+                        // 
+                      }}
+                    >
                       <View style={styles.row}>
                         <FeatherIcon
                           color="#616161"
@@ -103,18 +124,18 @@ export default function SettingsScreen() {
 
                         <View style={styles.rowSpacer} />
 
-                        {type === 'select' && (
+                        {type === "select" && (
                           <Text style={styles.rowValue}>{form[id]}</Text>
                         )}
 
-                        {type === 'toggle' && (
+                        {type === "toggle" && (
                           <Switch
-                            onChange={val => setForm({ ...form, [id]: val })}
+                            onChange={(val) => setForm({ ...form, [id]: val })}
                             value={form[id]}
                           />
                         )}
 
-                        {(type === 'select' || type === 'link') && (
+                        {(type === "select" || type === "link") && (
                           <FeatherIcon
                             color="#ababab"
                             name="chevron-right"
@@ -147,15 +168,15 @@ const styles = StyleSheet.create({
   },
   sectionHeaderText: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#a7a7a7',
-    textTransform: 'uppercase',
+    fontWeight: "600",
+    color: "#a7a7a7",
+    textTransform: "uppercase",
     letterSpacing: 1.2,
   },
   sectionBody: {
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: '#e3e3e3',
+    borderColor: "#e3e3e3",
   },
   header: {
     paddingLeft: 24,
@@ -164,23 +185,23 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontWeight: '700',
-    color: '#1d1d1d',
+    fontWeight: "700",
+    color: "#1d1d1d",
     marginBottom: 6,
   },
   subtitle: {
     fontSize: 15,
-    fontWeight: '500',
-    color: '#929292',
+    fontWeight: "500",
+    color: "#929292",
   },
   profile: {
     padding: 16,
-    flexDirection: 'column',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "#fff",
     borderTopWidth: 1,
     borderBottomWidth: 1,
-    borderColor: '#e3e3e3',
+    borderColor: "#e3e3e3",
   },
   profileAvatar: {
     width: 60,
@@ -190,55 +211,55 @@ const styles = StyleSheet.create({
   profileName: {
     marginTop: 12,
     fontSize: 20,
-    fontWeight: '600',
-    color: '#090909',
+    fontWeight: "600",
+    color: "#090909",
   },
   profileEmail: {
     marginTop: 6,
     fontSize: 16,
-    fontWeight: '400',
-    color: '#848484',
+    fontWeight: "400",
+    color: "#848484",
   },
   profileAction: {
     marginTop: 12,
     paddingVertical: 10,
     paddingHorizontal: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#007bff',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#007bff",
     borderRadius: 12,
   },
   profileActionText: {
     marginRight: 8,
     fontSize: 15,
-    fontWeight: '600',
-    color: '#fff',
+    fontWeight: "600",
+    color: "#fff",
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "flex-start",
     paddingRight: 24,
     height: 50,
   },
   rowWrapper: {
     paddingLeft: 24,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderTopWidth: 1,
-    borderColor: '#e3e3e3',
+    borderColor: "#e3e3e3",
   },
   rowIcon: {
     marginRight: 12,
   },
   rowLabel: {
     fontSize: 17,
-    fontWeight: '500',
-    color: '#000',
+    fontWeight: "500",
+    color: "#000",
   },
   rowValue: {
     fontSize: 17,
-    color: '#616161',
+    color: "#616161",
     marginRight: 4,
   },
   rowSpacer: {

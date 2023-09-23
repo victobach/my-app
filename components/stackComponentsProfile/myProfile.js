@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
   authDomain: "innovationogtekt.firebaseapp.com",
@@ -26,14 +27,15 @@ const MinProfil = ({ navigation }) => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const profileRef = doc(firestore, 'MyProfile', 'MyProfile');
+
+        const profileRef = doc(firestore, "MyProfile", "MyProfile"); // Replace with your actual document ID
         const docSnapshot = await getDoc(profileRef);
 
         if (docSnapshot.exists()) {
           setProfileData(docSnapshot.data());
         }
       } catch (error) {
-        console.error('Error fetching profile data:', error);
+        console.error("Error fetching profile data:", error);
       } finally {
         setLoading(false);
       }
@@ -68,7 +70,7 @@ const MinProfil = ({ navigation }) => {
       <Text style={styles.profileText}>Age: {profileData.Age}</Text>
       <Text style={styles.profileText}>Email: {profileData.Email}</Text>
       <Text style={styles.profileText}>Full Name: {profileData.FullName}</Text>
-      <Text style={styles.profileText}>Mobile Number: {profileData.MobilNummer}</Text>
+      <Text style={styles.profileText}>Mobile Number: {profileData.Mobilnummer}</Text>
       <Text style={styles.profileText}>User Name: {profileData.UserName}</Text>
     </View>
   );
