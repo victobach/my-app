@@ -16,7 +16,15 @@ const VenueDetails = ({ route, navigation }) => {
       />
       <Text style={styles.h1}>{venue.venueName}</Text>
       <Text style={styles.h1}>{venue.adress}</Text>
+      <Text style={styles.h1}>{venue.ageReg}</Text>
+      <Text style={styles.h1}>{venue.atmosphere}</Text>
+      <Text style={styles.h1}>{venue.capacity}</Text>
       <Text style={styles.h1}>{venue.description}</Text>
+      <Text style={styles.h1}>{venue.liveMusic}</Text>
+      <Text style={styles.h1}>{venue.musicGenre}</Text>
+      <Text style={styles.h1}>{venue.openingHours}</Text>
+      <Text style={styles.h1}>{venue.price}</Text>
+      <Text style={styles.h1}>{venue.tableService}</Text>
     </View>
   );
 };

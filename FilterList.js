@@ -1,11 +1,11 @@
 export const FilterList = [
-  "Price",
-  "Location",
-  "Music Genre",
-  "Live Music",
-  "Venue Type",
+  "Address",
+  "Age Requirement",
   "Atmosphere",
   "Capacity",
-  "Age Requirements",
+  "Live Music",
+  "Music Genre",
   "Opening Hours",
+  "Price",
+  "Table Service",
 ];
