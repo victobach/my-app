@@ -5,6 +5,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableHighlight,
+  Button,
 } from "react-native";
 
 import { VenueList } from "../../BarLists"; // Database importeres her
@@ -20,6 +21,14 @@ const ArrayListComponent = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView>
+        <Button
+          title="Venue Map"
+          onPress={() => navController(navigation, "Venues")}
+        />
+        <Button
+          title="Filter"
+          onPress={() => navController(navigation, "Filter")}
+        />
         {arr.map((item, index) => (
           <TouchableHighlight
             style={styles.button}

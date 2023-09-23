@@ -1,7 +1,7 @@
-import { initializeApp } from 'firebase/app';
-import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, Button } from 'react-native';
-import { getFirestore, doc, getDoc } from 'firebase/firestore/lite'; // Import Firestore from 'firebase/firestore/lite'
+import { initializeApp } from "firebase/app";
+import React, { useState, useEffect } from "react";
+import { View, Text, ActivityIndicator, Button } from "react-native";
+import { getFirestore, doc, getDoc } from "firebase/firestore/lite"; // Import Firestore from 'firebase/firestore/lite'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
@@ -27,14 +27,14 @@ const MinProfil = ({ navigation }) => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const profileRef = doc(firestore, 'MyProfile', 'MyProfile'); // Replace with your actual document ID
+        const profileRef = doc(firestore, "MyProfile", "MyProfile"); // Replace with your actual document ID
         const docSnapshot = await getDoc(profileRef);
 
         if (docSnapshot.exists()) {
           setProfileData(docSnapshot.data());
         }
       } catch (error) {
-        console.error('Error fetching profile data:', error);
+        console.error("Error fetching profile data:", error);
       } finally {
         setLoading(false);
       }
