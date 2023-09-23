@@ -1,6 +1,8 @@
 import * as React from "react";
 import { Button, Text, View, StyleSheet } from "react-native";
 
+//kode fra exercise
+
 const FetchListComponent = (props) => {
   return <Text>Dette er vores Fetchlist</Text>;
 };

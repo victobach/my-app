@@ -1,18 +1,33 @@
 import * as React from "react";
-import { Text, View, StyleSheet, ScrollView, FlatList } from "react-native";
-import { VenueList } from "../../BarLists"; // You're not using this import, make sure it's needed
+import {
+  Text,
+  View,
+  StyleSheet,
+  ScrollView,
+  TouchableHighlight,
+} from "react-native";
 
-const ArrayListComponent = (props) => {
-  // Create an example array for demonstration
+import { VenueList } from "../../BarLists"; // Database importeres her
+
+const navController = (navigation, route) => {
+  navigation.navigate(route);
+};
+
+const ArrayListComponent = ({ navigation }) => {
+  //data skal være array for dette virker
   const arr = VenueList;
 
   return (
     <View style={styles.container}>
       <ScrollView>
         {arr.map((item, index) => (
-          <Text style={styles.h1} key={index}>
-            {item}
-          </Text>
+          <TouchableHighlight
+            style={styles.button}
+            key={index}
+            onPress={() => navigation.navigate("VenueDetails", { venue: item })}
+          >
+            <Text style={styles.h1}>{item}</Text>
+          </TouchableHighlight>
         ))}
       </ScrollView>
     </View>
