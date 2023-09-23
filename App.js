@@ -31,7 +31,7 @@ export default function App() {
         <Tab.Navigator>
           <Tab.Screen name="Venue list" component={ArrayListComponent} />
           <Tab.Screen name="Venues Map" component={StackNavigatorVenues} />
-          <Tab.Screen name="Profile" component={StackNavigatorProfile} />
+          <Tab.Screen name="My Profile" component={StackNavigatorProfile} />
           <Tab.Screen name="Premium" component={Premium} />
           <Tab.Screen name="ClubOwner" component={ClubOwner} />
           <Tab.Screen name="Settings" component={SettingsScreen} />
