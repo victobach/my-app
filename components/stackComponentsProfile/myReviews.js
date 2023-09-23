@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, Button } from 'react-native';
+import { View, Text, ActivityIndicator, Button, StyleSheet, TouchableOpacity } from 'react-native'; // Import TouchableOpacity
 import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
@@ -34,7 +34,7 @@ const MyReviews = ({ navigation }) => {
           setReviewsData(docSnapshot.data());
         }
       } catch (error) {
-        console.error('Error fetching profile data:', error);
+        console.error('Error fetching reviews data:', error);
       } finally {
         setLoading(false);
       }
@@ -52,15 +52,47 @@ const MyReviews = ({ navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Button
-        title="My Favorites"
+    <View style={styles.container}>
+      <TouchableOpacity // Change Button to TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate("Favorites")}
-      />
-      <Text>Dine anmeldelser:</Text>
-      <Text>Din anmeldelse: {ReviewsData.MyReview_1}</Text>
+      >
+        <Text style={styles.buttonText}>My Favorites</Text>
+      </TouchableOpacity>
+      <Text style={styles.headerText}>My reviews:</Text>
+      <Text style={styles.profileText}>My first review: {ReviewsData.MyReview_1}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  button: {
+    backgroundColor: "#007AFF",
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  profileText: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+});
 
 export default MyReviews;

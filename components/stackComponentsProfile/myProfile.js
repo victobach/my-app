@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, Button } from 'react-native';
-import { getFirestore, doc, getDoc } from 'firebase/firestore/lite'; // Import Firestore from 'firebase/firestore/lite'
+import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
+import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
@@ -17,7 +17,6 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-// Create a Firestore instance
 const firestore = getFirestore();
 
 const MinProfil = ({ navigation }) => {
@@ -27,7 +26,7 @@ const MinProfil = ({ navigation }) => {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const profileRef = doc(firestore, 'MyProfile', 'MyProfile'); // Replace with your actual document ID
+        const profileRef = doc(firestore, 'MyProfile', 'MyProfile');
         const docSnapshot = await getDoc(profileRef);
 
         if (docSnapshot.exists()) {
@@ -52,23 +51,58 @@ const MinProfil = ({ navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Button
-        title="My Favorites"
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate("Favorites")}
-      />
-      <Button
-        title="My Reviews"
+      >
+        <Text style={styles.buttonText}>My Favorites</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
         onPress={() => navigation.navigate("Reviews")}
-      />
-      <Text>Your profile:</Text>
-      <Text>Age: {profileData.Age}</Text>
-      <Text>Email: {profileData.Email}</Text>
-      <Text>Fulde navn: {profileData.FullName}</Text>
-      <Text>Mobil nummer: {profileData.Mobilnummer}</Text>
-      <Text>User Name: {profileData.UserName}</Text>
+      >
+        <Text style={styles.buttonText}>My Reviews</Text>
+      </TouchableOpacity>
+      <Text style={styles.headerText}>My Profile:</Text>
+      <Text style={styles.profileText}>Age: {profileData.Age}</Text>
+      <Text style={styles.profileText}>Email: {profileData.Email}</Text>
+      <Text style={styles.profileText}>Full Name: {profileData.FullName}</Text>
+      <Text style={styles.profileText}>Mobile Number: {profileData.MobilNummer}</Text>
+      <Text style={styles.profileText}>User Name: {profileData.UserName}</Text>
     </View>
   );
 };
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  button: {
+    backgroundColor: "#007AFF",
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  profileText: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+});
+
 export default MinProfil;
+

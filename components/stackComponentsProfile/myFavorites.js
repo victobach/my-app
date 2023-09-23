@@ -1,23 +1,21 @@
 import { initializeApp } from 'firebase/app';
 import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, Button } from 'react-native';
+import { View, Text, ActivityIndicator, Button, StyleSheet } from 'react-native';
 import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
-  authDomain: "innovationogtekt.firebaseapp.com",
-  databaseURL:
-    "https://innovationogtekt-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "innovationogtekt",
-  storageBucket: "innovationogtekt.appspot.com",
-  messagingSenderId: "378823600165",
-  appId: "1:378823600165:web:3c7edb88d421c4aed177cc",
-  measurementId: "G-HRRR03JBJL",
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  databaseURL: "YOUR_DATABASE_URL",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID",
 };
 
 initializeApp(firebaseConfig);
 
-// Create a Firestore instance
 const firestore = getFirestore();
 
 const MyFavorites = ({ navigation }) => {
@@ -52,12 +50,37 @@ const MyFavorites = ({ navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Mine favoritter:</Text>
-      <Text>Favoritter: {FavoritesData.MyFavorite_1}</Text>
-      <Text>Favoritter: {FavoritesData.MyFavorite_2}</Text>
+    <View style={styles.container}>
+      <Button
+        title="My Favorites"
+        onPress={() => navigation.navigate("Favorites")}
+      />
+      <Text style={styles.headerText}>My Favorites:</Text>
+      <Text style={styles.favoriteText}>Favorite 1: {FavoritesData.MyFavorite_1}</Text>
+      <Text style={styles.favoriteText}>Favorite 2: {FavoritesData.MyFavorite_2}</Text>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    fontFamily: 'Arial',
+    color: 'blue',
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  favoriteText: {
+    fontSize: 18,
+    marginBottom: 5,
+  },
+});
 
 export default MyFavorites;
