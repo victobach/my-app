@@ -23,6 +23,10 @@ const firebaseConfig = {
   measurementId: "G-HRRR03JBJL",
 };
 
+const navController = (navigation, route) => {
+  navigation.navigate(route);
+};
+
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
