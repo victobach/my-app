@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Image } from "react-native";
 import { initializeApp } from "firebase/app";
-import { getFirestore, setDoc, doc } from "firebase/firestore";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
 
 export default function LoginScreen({ navigation }) {
-  const [clubName, setClubName] = useState("");
+  const [email, setEmail] = useState(""); // Change to email input
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,21 +24,41 @@ export default function LoginScreen({ navigation }) {
     measurementId: "G-HRRR03JBJL",
   };
 
+  initializeApp(firebaseConfig);
+  const auth = getAuth();
+
   const handleLogin = async () => {
     setIsLoading(true);
-    setIsLoading(false);
-  };
 
-  initializeApp(firebaseConfig);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email, // Use the email input directly
+        password
+      );
+
+      const user = userCredential.user;
+      console.log("Logged in as:", user.uid);
+
+      // You can now navigate to the next screen or perform other actions upon successful login.
+    } catch (error) {
+      console.error("Error logging in:", error.code, error.message);
+      // Handle the error and provide feedback to the user
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <Image style={styles.logo} />
       <TextInput
-        placeholder="Club Name"
-        value={clubName}
-        onChangeText={(text) => setClubName(text)}
+        placeholder="Email" // Change placeholder to "Email"
+        value={email}
+        onChangeText={(text) => setEmail(text)}
         style={styles.input}
+        keyboardType="email-address" // Set keyboardType to "email-address"
+        autoCapitalize="none" // Disable auto-capitalization for email
       />
       <TextInput
         placeholder="Password"
