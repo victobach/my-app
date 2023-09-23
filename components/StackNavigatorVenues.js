@@ -12,6 +12,7 @@ import Venues from "./stackComponentsVenues/Venues";
 import Filter from "./stackComponentsVenues/Filter";
 import ArrayListComponent from "./venueListComponents/ArrayListComponent";
 import VenueDetails from "./venueListComponents/VenueDetails";
+import Book from "./venueListComponents/Book";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ function StackNavigatorVenues() {
       <Stack.Screen name="VenueDetails" component={VenueDetails} />
       <Stack.Screen name="All Venues" component={AllVenues} />
       <Stack.Screen name="Venues" component={Venues} />
+      <Stack.Screen name="Book" component={Book} />
       <Stack.Screen name="Filter" component={Filter} />
     </Stack.Navigator>
   );
