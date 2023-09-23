@@ -14,7 +14,7 @@ const VenueDetails = ({ route, navigation }) => {
         title="Booking"
         onPress={() => navController(navigation, "Book")}
       />
-      <Text style={styles.h1}>{venue}</Text>
+      <Text style={styles.h1}>{venue.venueName}</Text>
       <Text style={styles.h1}>{venue.adress}</Text>
       <Text style={styles.h1}>{venue.description}</Text>
     </View>
