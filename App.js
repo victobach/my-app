@@ -42,6 +42,7 @@ export default function App() {
           <Tab.Screen name="Premium" component={Premium} />
           <Tab.Screen name="ClubOwner" component={ClubOwner} />
           <Tab.Screen name="Settings" component={SettingsScreen} />
+          <Tab.Screen name="UserLogin" component={UserLogin} />
         </Tab.Navigator>
       </NavigationContainer>
     </View>
