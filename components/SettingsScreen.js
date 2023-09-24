@@ -10,6 +10,7 @@ import {
   Switch,
 } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
+import { useNavigation } from "@react-navigation/native"; // Import useNavigation from react-navigation
 
 const SECTIONS = [
   {
@@ -17,7 +18,6 @@ const SECTIONS = [
     items: [
       { id: "language", icon: "globe", label: "Language", type: "select" },
       { id: "darkMode", icon: "moon", label: "Dark Mode", type: "toggle" },
-      { id: "wifi", icon: "wifi", label: "Use Wi-Fi", type: "toggle" },
     ],
   },
   {
@@ -33,7 +33,6 @@ export default function SettingsScreen() {
   const [form, setForm] = useState({
     language: "English",
     darkMode: true,
-    wifi: false,
   });
 
   const [user, setUser] = useState({
@@ -59,14 +58,70 @@ export default function SettingsScreen() {
       });
   }, []);
 
+  // Toggle function to switch between dark and light modes
+  const toggleDarkMode = () => {
+    setForm({ ...form, darkMode: !form.darkMode });
+  };
+
+  // Define styles for light mode
+  const lightStyles = StyleSheet.create({
+    container: {
+      paddingVertical: 24,
+      backgroundColor: "#f6f6f6",
+    },
+  });
+
+  // Define styles for dark mode
+  const darkStyles = StyleSheet.create({
+    container: {
+      paddingVertical: 24,
+      backgroundColor: "#121212", 
+    },
+    sectionHeader: {
+      // Update the background color for section headers in dark mode
+      backgroundColor: "#121212", 
+    },
+    rowWrapper: {
+      // Update the background color for row wrappers in dark mode
+      backgroundColor: "#121212", // 
+    },
+    // Styles for the black top bar
+    blackTopBar: {
+      backgroundColor: "#000", // Black background
+    },
+    whiteText: {
+      color: "#fff", // White text color
+    },
+  });
+
+  const navigation = useNavigation(); // Get access to the navigation object
+  // look and css taken from website
+
   return (
-    <SafeAreaView style={{ backgroundColor: "#f6f6f6" }}>
+    <SafeAreaView
+      style={form.darkMode ? darkStyles.container : lightStyles.container}
+    >
       <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Settings</Text>
+        <View
+          style={[
+            form.darkMode
+              ? [styles.header, darkStyles.blackTopBar]
+              : [styles.header, styles.lightTopBar],
+          ]}
+        >
+          <Text style={[styles.title, darkStyles.whiteText]}>Settings</Text>
         </View>
 
-        <View style={styles.profile}>
+        <View
+          style={
+            form.darkMode
+              ? [
+                  styles.profile,
+                  { backgroundColor: "#121212", borderColor: "#e3e3e3" },
+                ]
+              : styles.profile
+          }
+        >
           <Image
             alt=""
             source={{
@@ -75,27 +130,70 @@ export default function SettingsScreen() {
             style={styles.profileAvatar}
           />
 
-          <Text style={styles.profileName}>{user.name}</Text>
+          <Text
+            style={[
+              styles.profileName,
+              { color: form.darkMode ? "#fff" : "#090909" },
+            ]}
+          >
+            {user.name}
+          </Text>
 
-          <Text style={styles.profileEmail}>{user.email}</Text>
+          <Text
+            style={[
+              styles.profileEmail,
+              { color: form.darkMode ? "#ababab" : "#848484" },
+            ]}
+          >
+            {user.email}
+          </Text>
 
           <TouchableOpacity
             onPress={() => {
-              // handle onPress
+              navigation.navigate("Profile");
             }}
           >
-            <View style={styles.profileAction}>
-              <Text style={styles.profileActionText}>Edit Profile</Text>
+            <View
+              style={[
+                styles.profileAction,
+                { backgroundColor: form.darkMode ? "#fff" : "#007bff" },
+              ]}
+            >
+              <Text
+                style={[
+                  styles.profileActionText,
+                  { color: form.darkMode ? "#007bff" : "#fff" },
+                ]}
+              >
+                Edit Profile
+              </Text>
 
-              <FeatherIcon color="#fff" name="edit" size={16} />
+              <FeatherIcon
+                color={form.darkMode ? "#007bff" : "#fff"}
+                name="edit"
+                size={16}
+              />
             </View>
           </TouchableOpacity>
         </View>
 
         {SECTIONS.map(({ header, items }) => (
           <View style={styles.section} key={header}>
-            <View style={styles.sectionHeader}>
-              <Text style={styles.sectionHeaderText}>{header}</Text>
+            <View
+              style={
+                form.darkMode
+                  ? [styles.sectionHeader, darkStyles.sectionHeader]
+                  : styles.sectionHeader
+              }
+            >
+              <Text
+                style={[
+                  styles.sectionHeaderText,
+                  { color: form.darkMode ? "#fff" : "#a7a7a7" },
+                ]}
+              >
+                {header}
+              </Text>
             </View>
             <View style={styles.sectionBody}>
               {items.map(({ id, label, icon, type, value }, index) => {
@@ -104,40 +202,62 @@ export default function SettingsScreen() {
                     key={id}
                     style={[
                       styles.rowWrapper,
+                      form.darkMode && darkStyles.rowWrapper, // Apply dark mode style when darkMode is true
                       index === 0 && { borderTopWidth: 0 },
                     ]}
                   >
                     <TouchableOpacity
                       onPress={() => {
-                        // 
+                        if (type === "toggle") {
+                          toggleDarkMode();
+                        } else if (type === "link" && id === "bug") {
+                          // Navigate to the "Report Bug" screen when "Report Bug" is pressed
+                          navigation.navigate("Report Bug");
+                        } else {
+                          console.log("Toggled");
+                        }
                       }}
                     >
                       <View style={styles.row}>
                         <FeatherIcon
-                          color="#616161"
+                          color={form.darkMode ? "#fff" : "#616161"}
                           name={icon}
                           style={styles.rowIcon}
                           size={22}
                         />
 
-                        <Text style={styles.rowLabel}>{label}</Text>
+                        <Text
+                          style={[
+                            styles.rowLabel,
+                            { color: form.darkMode ? "#fff" : "#000" },
+                          ]}
+                        >
+                          {label}
+                        </Text>
 
                         <View style={styles.rowSpacer} />
 
                         {type === "select" && (
-                          <Text style={styles.rowValue}>{form[id]}</Text>
+                          <Text
+                            style={[
+                              styles.rowValue,
+                              { color: form.darkMode ? "#fff" : "#616161" },
+                            ]}
+                          >
+                            {form[id]}
+                          </Text>
                         )}
 
                         {type === "toggle" && (
                           <Switch
-                            onChange={(val) => setForm({ ...form, [id]: val })}
-                            value={form[id]}
+                            onChange={toggleDarkMode}
+                            value={form.darkMode}
                           />
                         )}
 
                         {(type === "select" || type === "link") && (
                           <FeatherIcon
-                            color="#ababab"
+                            color={form.darkMode ? "#fff" : "#ababab"}
                             name="chevron-right"
                             size={22}
                           />
@@ -156,9 +276,6 @@ export default function SettingsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 24,
-  },
   section: {
     paddingTop: 12,
   },
@@ -169,7 +286,6 @@ const styles = StyleSheet.create({
   sectionHeaderText: {
     fontSize: 14,
     fontWeight: "600",
-    color: "#a7a7a7",
     textTransform: "uppercase",
     letterSpacing: 1.2,
   },
@@ -182,11 +298,14 @@ const styles = StyleSheet.create({
     paddingLeft: 24,
     paddingRight: 24,
     marginBottom: 12,
+    backgroundColor: "#f6f6f6",
+  },
+  lightTopBar: {
+    backgroundColor: "#f6f6f6", // Light mode background color
   },
   title: {
     fontSize: 32,
     fontWeight: "700",
-    color: "#1d1d1d",
     marginBottom: 6,
   },
   subtitle: {
@@ -212,13 +331,11 @@ const styles = StyleSheet.create({
     marginTop: 12,
     fontSize: 20,
     fontWeight: "600",
-    color: "#090909",
   },
   profileEmail: {
     marginTop: 6,
     fontSize: 16,
     fontWeight: "400",
-    color: "#848484",
   },
   profileAction: {
     marginTop: 12,
@@ -227,14 +344,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#007bff",
     borderRadius: 12,
   },
   profileActionText: {
     marginRight: 8,
     fontSize: 15,
     fontWeight: "600",
-    color: "#fff",
   },
   row: {
     flexDirection: "row",
@@ -255,11 +370,9 @@ const styles = StyleSheet.create({
   rowLabel: {
     fontSize: 17,
     fontWeight: "500",
-    color: "#000",
   },
   rowValue: {
     fontSize: 17,
-    color: "#616161",
     marginRight: 4,
   },
   rowSpacer: {
