@@ -13,6 +13,7 @@ import VenueDetails from "./components/venueListComponents/VenueDetails";
 import { VenueList } from "./BarLists";
 import { Area } from "./BarLists";
 import { GetUserURL } from "./BarLists";
+import StackNavigatorSettings from "./components/StackNavigatorSettings";
 import {
   Text,
   View,
@@ -41,7 +42,7 @@ export default function App() {
           <Tab.Screen name="My Profile" component={StackNavigatorProfile} />
           <Tab.Screen name="Premium" component={Premium} />
           <Tab.Screen name="ClubOwner" component={ClubOwner} />
-          <Tab.Screen name="Settings" component={SettingsScreen} />
+          <Tab.Screen name="Settings" component={StackNavigatorSettings} />
           <Tab.Screen name="UserLogin" component={UserLogin} />
         </Tab.Navigator>
       </NavigationContainer>
