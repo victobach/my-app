@@ -20,6 +20,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
+import UserLogin from "./components/UserLogin";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
