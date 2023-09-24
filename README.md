@@ -5,3 +5,5 @@ HOW TO RUN: type "npm i" in terminal, wait for downloads, then type "npx expo st
 EJERSKAB:
 
 Victor Bach S:153341 har udviklet følgende views: VenueDetails, ArrayListComponent, Filter og Venues. Og følgende Komponenter: StackNavigatorVenues.js, FilterList.js & VenueListImporter.js
+
+Benjamin Blom S151868 har udviklet følgende view: ClubOwner, Book, MyProfile. 
