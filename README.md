@@ -8,6 +8,6 @@ Victor Bach S:153341 har udviklet følgende views: VenueDetails, ArrayListCompon
 
 Benjamin Blom S151868 har udviklet følgende view: ClubOwner, Book, MyProfile. 
 
-Bastian Løager Andersen S:145784 har udviklet følgende views i stackComponentsProfile: MyProfile.JS, MyReviews.JS. Herudover UserLogin.JS. 
+Bastian Løager Andersen S:145784 har udviklet følgende views i stackComponentsProfile: MyProfile.js, MyReviews.js. Herudover UserLogin.js, StackNavigatorProfile.js & BarLists.js 
 
 Christian Søndergaard XXXX har udviklet følgende views: SettingsScreen, premium.js, MyBug.js og følgende komponent: StackNavigatorSettings.js, 
