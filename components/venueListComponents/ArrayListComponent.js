@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 
+//firebase opsætning
 const firebaseConfig = {
   apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
   authDomain: "innovationogtekt.firebaseapp.com",
@@ -30,6 +31,7 @@ const navController = (navigation, route) => {
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
+//import af data fra firebase til array
 const ArrayListComponent = ({ navigation }) => {
   const [VenueData, setVenueData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -60,7 +62,7 @@ const ArrayListComponent = ({ navigation }) => {
   if (VenueData.length === 0) {
     return <Text>Error fetching Venue data</Text>;
   }
-
+  //view fyld
   return (
     <View style={styles.container}>
       <ScrollView>
