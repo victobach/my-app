@@ -76,7 +76,7 @@ const MinProfil = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({ // Styling: 
   container: {
     flex: 1,
     justifyContent: "center",
