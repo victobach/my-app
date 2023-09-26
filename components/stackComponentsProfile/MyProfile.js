@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
 
-
+// Firebase credentials 
 const firebaseConfig = {
   apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
   authDomain: "innovationogtekt.firebaseapp.com",
@@ -28,14 +28,14 @@ const MinProfil = ({ navigation }) => {
     const fetchProfileData = async () => {
       try {
 
-        const profileRef = doc(firestore, "MyProfile", "MyProfile"); // Replace with your actual document ID
+        const profileRef = doc(firestore, "MyProfile", "MyProfile"); // My document ID's
         const docSnapshot = await getDoc(profileRef);
 
         if (docSnapshot.exists()) {
           setProfileData(docSnapshot.data());
         }
       } catch (error) {
-        console.error("Error fetching profile data:", error);
+        console.error("Error fetching profile data:", error); // Error-handling 
       } finally {
         setLoading(false);
       }
@@ -52,8 +52,8 @@ const MinProfil = ({ navigation }) => {
     return <Text>Error fetching profile data</Text>;
   }
 
-  return (
-    <View style={styles.container}>
+  return ( // Takes data from Firebase and uses that to display for the user(s). 
+    <View style={styles.container}> 
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Favorites")}
@@ -64,7 +64,7 @@ const MinProfil = ({ navigation }) => {
         style={styles.button}
         onPress={() => navigation.navigate("Reviews")}
       >
-        <Text style={styles.buttonText}>My Reviews</Text>
+        <Text style={styles.buttonText}>My Reviews</Text> 
       </TouchableOpacity>
       <Text style={styles.headerText}>My Profile:</Text>
       <Text style={styles.profileText}>Age: {profileData.Age}</Text>
