@@ -1,14 +1,6 @@
 import { initializeApp } from "firebase/app";
 import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  Button,
-  StyleSheet,
-  ScrollView,
-  TouchableHighlight,
-} from "react-native";
+import { View, Text, ActivityIndicator, Button, StyleSheet, ScrollView, TouchableHighlight} from "react-native";
 import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 
 //firebase opsætning
@@ -68,7 +60,7 @@ const VenueList = ({ navigation }) => {
       <ScrollView>
         <Button
           title="Venue Map"
-          onPress={() => navController(navigation, "Venues")}
+          onPress={() => navController(navigation, "Venue Map")}
         />
         <Button
           title="Filter"
@@ -103,3 +95,4 @@ const styles = StyleSheet.create({
 });
 
 export default VenueList;
+

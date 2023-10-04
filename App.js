@@ -7,7 +7,7 @@ import SettingsScreen from "./components/SettingsScreen";
 import Premium from "./components/Premium";
 import ClubOwner from "./components/ClubOwner";
 import StackNavigatorProfile from "./components/StackNavigatorProfile";
-import Venues from "./components/stackComponentsVenues/Venues";
+import VenueMap from "./components/stackComponentsVenues/VenueMap";
 import VenueList from "./components/venueListComponents/VenueList";
 import VenueDetails from "./components/venueListComponents/VenueDetails";
 import StackNavigatorSettings from "./components/StackNavigatorSettings";
