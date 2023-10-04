@@ -8,11 +8,8 @@ import Premium from "./components/Premium";
 import ClubOwner from "./components/ClubOwner";
 import StackNavigatorProfile from "./components/StackNavigatorProfile";
 import Venues from "./components/stackComponentsVenues/Venues";
-import ArrayListComponent from "./components/venueListComponents/ArrayListComponent";
+import VenueList from "./components/venueListComponents/VenueList";
 import VenueDetails from "./components/venueListComponents/VenueDetails";
-import { VenueList } from "./BarLists";
-import { Area } from "./BarLists";
-import { GetUserURL } from "./BarLists";
 import StackNavigatorSettings from "./components/StackNavigatorSettings";
 import {
   Text,
@@ -22,6 +19,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import UserLogin from "./components/UserLogin";
+import MyFavorites from "./components/stackComponentsProfile/MyFavorites";
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -39,11 +38,10 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Venues" component={StackNavigatorVenues} />
-          <Tab.Screen name="My Profile" component={StackNavigatorProfile} />
+          <Tab.Screen name="Favorites" component={MyFavorites} />
           <Tab.Screen name="Premium" component={Premium} />
-          <Tab.Screen name="ClubOwner" component={ClubOwner} />
-          <Tab.Screen name="Settings" component={StackNavigatorSettings} />
-          <Tab.Screen name="UserLogin" component={UserLogin} />
+          <Tab.Screen name="Profile" component={StackNavigatorProfile} />
+
         </Tab.Navigator>
       </NavigationContainer>
     </View>

@@ -32,7 +32,7 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
 //import af data fra firebase til array
-const ArrayListComponent = ({ navigation }) => {
+const VenueList = ({ navigation }) => {
   const [VenueData, setVenueData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ArrayListComponent;
+export default VenueList;
