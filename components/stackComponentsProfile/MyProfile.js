@@ -56,26 +56,22 @@ const MinProfil = ({ navigation }) => {
     <View style={styles.container}> 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Favorites")}
-      >
+        onPress={() => navigation.navigate("Favorites")}>
         <Text style={styles.buttonText}>My Favorites</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Reviews")}
-      >
+        onPress={() => navigation.navigate("Reviews")}>
         <Text style={styles.buttonText}>My Reviews</Text> 
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Settings")}
-      >
+        onPress={() => navigation.navigate("Settings")}>
         <Text style={styles.buttonText}>Settings</Text> 
       </TouchableOpacity>
 
-
-      
       <Text style={styles.headerText}>My Profile:</Text>
       <Text style={styles.profileText}>Age: {profileData.Age}</Text>
       <Text style={styles.profileText}>Email: {profileData.Email}</Text>
