@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Image } from "react-native";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc } from "firebase/firestore";
+import Toast from "react-native-toast-message";
 
 const navController = (navigation, route) => {
   navigation.navigate(route);
@@ -44,6 +45,15 @@ export default function CreateVenueScreen({ navigation }) {
     try {
       await addDoc(collection(db, "PartnerSignUp"), data);
       console.log("Venue data saved to Firestore successfully!");
+
+      // Show a success message using toast
+      Toast.show({
+        text1: "Request sent!",
+        text2: "The NightOwl team will get back to you.",
+        type: "success",
+        visibilityTime: 4000, // Display for 4 seconds
+        autoHide: true,
+      });
     } catch (error) {
       console.error("Error saving venue data to Firestore:", error);
     }
@@ -89,6 +99,8 @@ export default function CreateVenueScreen({ navigation }) {
         onPress={handleCreateVenue}
         disabled={isLoading}
       />
+
+      <Toast style={{ zIndex: 1 }} ref={(ref) => Toast.setRef(ref)} />
     </View>
   );
 }

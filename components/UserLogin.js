@@ -54,7 +54,7 @@ export default function LoginScreen({ navigation }) {
 
       // Check if the error is due to an account not existing
       if (error.code === "auth/invalid-login-credentials") {
-        Alert.alert("Account Not Found", "The email or password is incorrect.");
+        Alert.alert("Account not found", "The email or password is incorrect.");
       } else {
         Alert.alert("Login Error", "An error occurred during login.");
       }

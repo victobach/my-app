@@ -1,9 +1,16 @@
-import { initializeApp } from 'firebase/app';
-import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
-import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
+import { initializeApp } from "firebase/app";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
+import { getFirestore, doc, getDoc } from "firebase/firestore/lite";
+import QRCode from "react-native-qrcode-svg";
 
-// Firebase credentials 
+// Firebase credentials
 const firebaseConfig = {
   apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
   authDomain: "innovationogtekt.firebaseapp.com",
@@ -23,19 +30,22 @@ const firestore = getFirestore();
 const MinProfil = ({ navigation }) => {
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [qrCodeData, setQRCodeData] = useState("");
+  const [showQRCode, setShowQRCode] = useState(false);
 
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-
         const profileRef = doc(firestore, "MyProfile", "MyProfile"); // My document ID's
         const docSnapshot = await getDoc(profileRef);
 
         if (docSnapshot.exists()) {
+          const email = docSnapshot.data().Email;
           setProfileData(docSnapshot.data());
+          setQRCodeData(email);
         }
       } catch (error) {
-        console.error("Error fetching profile data:", error); // Error-handling 
+        console.error("Error fetching profile data:", error); // Error-handling
       } finally {
         setLoading(false);
       }
@@ -43,6 +53,10 @@ const MinProfil = ({ navigation }) => {
 
     fetchProfileData();
   }, []);
+
+  const toggleQRCode = () => {
+    setShowQRCode(!showQRCode);
+  };
 
   if (loading) {
     return <ActivityIndicator size="large" />;
@@ -52,37 +66,32 @@ const MinProfil = ({ navigation }) => {
     return <Text>Error fetching profile data</Text>;
   }
 
-  return ( // Takes data from Firebase and uses that to display for the user(s). 
-    <View style={styles.container}> 
+  return (
+    // Takes data from Firebase and uses that to display for the user(s).
+    <View style={styles.container}>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Favorites")}>
-        <Text style={styles.buttonText}>My Favorites</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Reviews")}>
-        <Text style={styles.buttonText}>My Reviews</Text> 
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Settings")}>
-        <Text style={styles.buttonText}>Settings</Text> 
+        onPress={toggleQRCode} // Show/hide QR code on button click
+      >
+        <Text style={styles.buttonText}>Show QR Code</Text>
       </TouchableOpacity>
 
       <Text style={styles.headerText}>My Profile:</Text>
       <Text style={styles.profileText}>Age: {profileData.Age}</Text>
       <Text style={styles.profileText}>Email: {profileData.Email}</Text>
       <Text style={styles.profileText}>Full Name: {profileData.FullName}</Text>
-      <Text style={styles.profileText}>Mobile Number: {profileData.Mobilnummer}</Text>
+      <Text style={styles.profileText}>
+        Mobile Number: {profileData.Mobilnummer}
+      </Text>
       <Text style={styles.profileText}>User Name: {profileData.UserName}</Text>
+
+      {showQRCode && <QRCode value={qrCodeData} size={200} />}
     </View>
   );
 };
 
-const styles = StyleSheet.create({ // Styling: 
+const styles = StyleSheet.create({
+  // Styling:
   container: {
     flex: 1,
     justifyContent: "center",
@@ -113,4 +122,3 @@ const styles = StyleSheet.create({ // Styling:
 });
 
 export default MinProfil;
-
