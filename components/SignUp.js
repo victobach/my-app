@@ -9,55 +9,46 @@ import {
   Alert,
 } from "react-native"; // Import Alert from "react-native"
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
-const navController = (navigation, route) => {
-  navigation.navigate(route);
+const firebaseConfig = {
+  apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
+  authDomain: "innovationogtekt.firebaseapp.com",
+  databaseURL:
+    "https://innovationogtekt-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "innovationogtekt",
+  storageBucket: "innovationogtekt.appspot.com",
+  messagingSenderId: "378823600165",
+  appId: "1:378823600165:web:3c7edb88d421c4aed177cc",
+  measurementId: "G-HRRR03JBJL",
 };
 
-export default function LoginScreen({ navigation }) {
+initializeApp(firebaseConfig);
+const auth = getAuth();
+
+export default function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
-    authDomain: "innovationogtekt.firebaseapp.com",
-    databaseURL:
-      "https://innovationogtekt-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "innovationogtekt",
-    storageBucket: "innovationogtekt.appspot.com",
-    messagingSenderId: "378823600165",
-    appId: "1:378823600165:web:3c7edb88d421c4aed177cc",
-    measurementId: "G-HRRR03JBJL",
-  };
-
-  initializeApp(firebaseConfig);
-  const auth = getAuth();
-
-  const handleLogin = async () => {
+  const handleSignUp = async () => {
     setIsLoading(true);
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-
       const user = userCredential.user;
-      console.log("Logged in as:", user.uid);
-
-      navigation.navigate("VenueList");
+      console.log("User created:", user.uid);
+      navigation.navigate("UserLogin");
     } catch (error) {
-      console.error("Error logging in:", error.code, error.message);
-
-      // Check if the error is due to an account not existing
-      if (error.code === "auth/invalid-login-credentials") {
-        Alert.alert("Account Not Found", "The email or password is incorrect.");
-      } else {
-        Alert.alert("Login Error", "An error occurred during login.");
-      }
+      console.error("Error signing up:", error.code, error.message);
+      Alert.alert(
+        "Invalid Input",
+        "Please enter a valid email and a password of at least 6 characters."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -81,7 +72,7 @@ export default function LoginScreen({ navigation }) {
         secureTextEntry
         style={styles.input}
       />
-      <Button title="Login" onPress={handleLogin} disabled={isLoading} />
+      <Button title="Create user" onPress={handleSignUp} disabled={isLoading} />
     </View>
   );
 }
@@ -107,3 +98,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+
+
+// Fikse partner sign-up

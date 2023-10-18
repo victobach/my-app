@@ -20,7 +20,10 @@ import {
 } from "react-native";
 import UserLogin from "./components/UserLogin";
 import MyFavorites from "./components/stackComponentsProfile/MyFavorites";
-
+import SignUpScreen from "./components/SignUp";
+import Different from "./components/ModifyUserData";
+import ThisIsDifferent from "./components/ModifyUserData";
+import LoginScreen from "./components/ModifyUserData";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -41,7 +44,9 @@ export default function App() {
           <Tab.Screen name="Favorites" component={MyFavorites} />
           <Tab.Screen name="Premium" component={Premium} />
           <Tab.Screen name="Profile" component={StackNavigatorProfile} />
-
+          <Tab.Screen name="UserLogin" component={UserLogin} />
+          <Tab.Screen name="SignUp" component={SignUpScreen} />
+          <Tab.Screen name="ModifyUserData" component={LoginScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </View>
