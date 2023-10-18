@@ -5,7 +5,6 @@ import StackNavigatorVenues from "./components/StackNavigatorVenues";
 import { createStackNavigator } from "@react-navigation/stack";
 import SettingsScreen from "./components/SettingsScreen";
 import Premium from "./components/Premium";
-import ClubOwner from "./components/ClubOwner";
 import StackNavigatorProfile from "./components/StackNavigatorProfile";
 import VenueMap from "./components/stackComponentsVenues/VenueMap";
 import VenueList from "./components/venueListComponents/VenueList";
@@ -24,6 +23,7 @@ import SignUpScreen from "./components/SignUp";
 import Different from "./components/ModifyUserData";
 import ThisIsDifferent from "./components/ModifyUserData";
 import LoginScreen from "./components/ModifyUserData";
+import CreateVenueScreen from "./components/PartnerSignUp";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -47,6 +47,7 @@ export default function App() {
           <Tab.Screen name="UserLogin" component={UserLogin} />
           <Tab.Screen name="SignUp" component={SignUpScreen} />
           <Tab.Screen name="ModifyUserData" component={LoginScreen} />
+          <Tab.Screen name="PatnerSignUp" component={CreateVenueScreen} />
         </Tab.Navigator>
       </NavigationContainer>
     </View>

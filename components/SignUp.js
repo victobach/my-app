@@ -98,7 +98,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-
-
-// Fikse partner sign-up
