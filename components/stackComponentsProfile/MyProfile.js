@@ -67,13 +67,30 @@ const MinProfil = ({ navigation }) => {
   }
 
   return (
-    // Takes data from Firebase and uses that to display for the user(s).
     <View style={styles.container}>
+      <TouchableOpacity style={styles.button} onPress={toggleQRCode}>
+        <Text style={styles.buttonText}>Show QR Code</Text>
+      </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.button}
-        onPress={toggleQRCode} // Show/hide QR code on button click
+        onPress={() => navigation.navigate("Favorites")}
       >
-        <Text style={styles.buttonText}>Show QR Code</Text>
+        <Text style={styles.buttonText}>My Favorites</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Reviews")}
+      >
+        <Text style={styles.buttonText}>My Reviews</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Settings")}
+      >
+        <Text style={styles.buttonText}>Settings</Text>
       </TouchableOpacity>
 
       <Text style={styles.headerText}>My Profile:</Text>
