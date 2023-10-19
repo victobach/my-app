@@ -93,6 +93,12 @@ const MinProfil = ({ navigation }) => {
           navigation.navigate("LoginNavigator", { screen: "Login" })
         }
       />
+      <Button
+        title="Settings"
+        onPress={() =>
+          navigation.navigate("SettingsNavigator", { screen: "Settings" })
+        }
+      />
     </View>
   );
 };

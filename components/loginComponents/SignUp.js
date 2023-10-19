@@ -46,7 +46,7 @@ export default function SignUpScreen({ navigation }) {
       );
       const user = userCredential.user;
       console.log("User created:", user.uid);
-      navigation.navigate("UserLogin");
+      navigation.navigate("Login");
     } catch (error) {
       console.error("Error signing up:", error.code, error.message);
       Alert.alert(

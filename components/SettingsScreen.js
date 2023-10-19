@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Switch,
+  Button,
 } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native"; // Import useNavigation from react-navigation
@@ -150,13 +151,9 @@ export default function SettingsScreen() {
 
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Profile");
+              navigation.navigate("EditUser");
             }}
           >
-            <Button
-              title="Edit User"
-              onPress={() => navController(navigation, "EditUser")}
-            />
             <View
               style={[
                 styles.profileAction,
