@@ -1,5 +1,5 @@
 export const FilterList = [
-  "Address",
+  "Area",
   "Age Requirement",
   "Atmosphere",
   "Capacity",

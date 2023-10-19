@@ -11,6 +11,10 @@ import {
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
+const navController = (navigation, route) => {
+  navigation.navigate(route);
+};
+
 const firebaseConfig = {
   apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
   authDomain: "innovationogtekt.firebaseapp.com",
@@ -42,7 +46,7 @@ export default function SignUpScreen({ navigation }) {
       );
       const user = userCredential.user;
       console.log("User created:", user.uid);
-      navigation.navigate("UserLogin");
+      navigation.navigate("Login");
     } catch (error) {
       console.error("Error signing up:", error.code, error.message);
       Alert.alert(
@@ -73,6 +77,10 @@ export default function SignUpScreen({ navigation }) {
         style={styles.input}
       />
       <Button title="Create user" onPress={handleSignUp} disabled={isLoading} />
+      <Button
+        title="Are You a Venue Owner? Click here to apply for partnership"
+        onPress={() => navController(navigation, "PartnerSignUp")}
+      />
     </View>
   );
 }

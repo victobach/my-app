@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   Switch,
+  Button,
 } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native"; // Import useNavigation from react-navigation
@@ -75,15 +76,15 @@ export default function SettingsScreen() {
   const darkStyles = StyleSheet.create({
     container: {
       paddingVertical: 24,
-      backgroundColor: "#121212", 
+      backgroundColor: "#121212",
     },
     sectionHeader: {
       // Update the background color for section headers in dark mode
-      backgroundColor: "#121212", 
+      backgroundColor: "#121212",
     },
     rowWrapper: {
       // Update the background color for row wrappers in dark mode
-      backgroundColor: "#121212", // 
+      backgroundColor: "#121212", //
     },
     // Styles for the black top bar
     blackTopBar: {
@@ -150,7 +151,7 @@ export default function SettingsScreen() {
 
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Profile");
+              navigation.navigate("EditUser");
             }}
           >
             <View

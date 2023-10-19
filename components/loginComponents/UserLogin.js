@@ -82,6 +82,10 @@ export default function LoginScreen({ navigation }) {
         style={styles.input}
       />
       <Button title="Login" onPress={handleLogin} disabled={isLoading} />
+      <Button
+        title="New? Create Account"
+        onPress={() => navController(navigation, "SignUp")}
+      />
     </View>
   );
 }

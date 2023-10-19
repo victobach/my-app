@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import { getFirestore, doc, getDoc } from "firebase/firestore/lite";
 import QRCode from "react-native-qrcode-svg";
@@ -103,6 +104,18 @@ const MinProfil = ({ navigation }) => {
       <Text style={styles.profileText}>User Name: {profileData.UserName}</Text>
 
       {showQRCode && <QRCode value={qrCodeData} size={200} />}
+      <Button
+        title="Log in"
+        onPress={() =>
+          navigation.navigate("LoginNavigator", { screen: "Login" })
+        }
+      />
+      <Button
+        title="Settings"
+        onPress={() =>
+          navigation.navigate("SettingsNavigator", { screen: "Settings" })
+        }
+      />
     </View>
   );
 };

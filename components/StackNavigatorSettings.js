@@ -2,6 +2,7 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import MyBugScreen from "./StackComponentsSettings/MyBug";
 import SettingsScreen from "./SettingsScreen";
+import EditUser from "./StackComponentsSettings/ModifyUserData";
 
 // Stack Navigator
 const Stack = createStackNavigator();
@@ -22,6 +23,7 @@ const StackNavigatorSettings = () => {
         //   headerShown: true,
         // }}
       />
+      <Stack.Screen name="EditUser" component={EditUser} />
     </Stack.Navigator>
   );
 };
