@@ -75,15 +75,15 @@ export default function SettingsScreen() {
   const darkStyles = StyleSheet.create({
     container: {
       paddingVertical: 24,
-      backgroundColor: "#121212", 
+      backgroundColor: "#121212",
     },
     sectionHeader: {
       // Update the background color for section headers in dark mode
-      backgroundColor: "#121212", 
+      backgroundColor: "#121212",
     },
     rowWrapper: {
       // Update the background color for row wrappers in dark mode
-      backgroundColor: "#121212", // 
+      backgroundColor: "#121212", //
     },
     // Styles for the black top bar
     blackTopBar: {
@@ -153,6 +153,10 @@ export default function SettingsScreen() {
               navigation.navigate("Profile");
             }}
           >
+            <Button
+              title="Edit User"
+              onPress={() => navController(navigation, "EditUser")}
+            />
             <View
               style={[
                 styles.profileAction,
