@@ -89,9 +89,19 @@ const MinProfil = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate("Settings")}
+        onPress={() =>
+          navigation.navigate("SettingsNavigator", { screen: "Settings" })
+        }
       >
         <Text style={styles.buttonText}>Settings</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>
+          navigation.navigate("LoginNavigator", { screen: "Login" })
+        }
+      >
+        <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
 
       <Text style={styles.headerText}>My Profile:</Text>
@@ -104,18 +114,6 @@ const MinProfil = ({ navigation }) => {
       <Text style={styles.profileText}>User Name: {profileData.UserName}</Text>
 
       {showQRCode && <QRCode value={qrCodeData} size={200} />}
-      <Button
-        title="Log in"
-        onPress={() =>
-          navigation.navigate("LoginNavigator", { screen: "Login" })
-        }
-      />
-      <Button
-        title="Settings"
-        onPress={() =>
-          navigation.navigate("SettingsNavigator", { screen: "Settings" })
-        }
-      />
     </View>
   );
 };
