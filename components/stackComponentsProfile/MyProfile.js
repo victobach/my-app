@@ -88,12 +88,12 @@ const MinProfil = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.settingsButton}
+        style={styles.button}
         onPress={() =>
           navigation.navigate("SettingsNavigator", { screen: "Settings" })
         }
       >
-        <Text style={styles.settingsIcon}>⚙️</Text>
+        <Text style={styles.button}>Settings⚙️</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
@@ -147,23 +147,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 5,
   },
-  settingsButton: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    padding: 15, // Increase padding to create a larger container around the icon
-    borderRadius: 5,
-    backgroundColor: "transparent" // Background color
-  },
-  settingsIconContainer: {
-    width: 1, // Width and height 
-    height: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  settingsIcon: {
-    fontSize: 30,
-    color: "#007AFF", // Color of the gearwheel icon
-}});
+});
 
 export default MinProfil;
