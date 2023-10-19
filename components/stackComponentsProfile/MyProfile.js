@@ -88,12 +88,12 @@ const MinProfil = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.button}
+        style={styles.settingsButton}
         onPress={() =>
           navigation.navigate("SettingsNavigator", { screen: "Settings" })
         }
       >
-        <Text style={styles.buttonText}>⚙️</Text>
+        <Text style={styles.settingsIcon}>⚙️</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.button}
