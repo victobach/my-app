@@ -10,30 +10,18 @@ import {
 } from "react-native";
 
 import { FilterList } from "../../FilterList"; // Database importeres her
+import FilterOptions from "./FilterOptions";
 
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
-
 const Filter = ({ navigation }) => {
-  //data skal være array for dette virker
   const arr = FilterList;
-  //Alert for midlertidig test af knap
-  const showAlert = () => {
-    Alert.alert(
-      "Filter Aktiveret",
-      "Dit filter er nu aktivt",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        { text: "OK", onPress: () => console.log("OK Pressed") },
-      ],
-      { cancelable: true }
-    );
+
+  const handleFilterPress = (selectedFilter) => {
+    navigation.navigate("FilterOptions", { chosenFilter: selectedFilter });
   };
+
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -42,7 +30,7 @@ const Filter = ({ navigation }) => {
           <TouchableHighlight
             style={styles.button}
             key={index}
-            onPress={showAlert}
+            onPress={() => handleFilterPress(item)}
           >
             <Text style={styles.h1}>{item}</Text>
           </TouchableHighlight>
@@ -51,7 +39,6 @@ const Filter = ({ navigation }) => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   // Definering af vores stylesheet
   container: {
