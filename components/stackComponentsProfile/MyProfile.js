@@ -69,8 +69,10 @@ const MinProfil = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={toggleQRCode}>
-        <Text style={styles.buttonText}>Show QR Code</Text>
+        <TouchableOpacity style={styles.button} onPress={toggleQRCode}>
+        <Text style={styles.buttonText}>
+          {showQRCode ? "Hide QR Code" : "Show QR Code"}
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity

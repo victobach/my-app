@@ -5,6 +5,7 @@ import StackNavigatorVenues from "./components/StackNavigatorVenues";
 import { createStackNavigator } from "@react-navigation/stack";
 import Premium from "./components/Premium";
 import StackNavigatorProfile from "./components/StackNavigatorProfile";
+import MyFavorites from "./components/stackComponentsProfile/MyFavorites";
 
 import {
   Text,
@@ -13,8 +14,6 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-
-import MyFavorites from "./components/stackComponentsProfile/MyFavorites";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

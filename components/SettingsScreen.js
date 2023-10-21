@@ -11,7 +11,7 @@ import {
   Button,
 } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
-import { useNavigation } from "@react-navigation/native"; // Import useNavigation from react-navigation
+import { useNavigation } from "@react-navigation/native"; 
 
 const SECTIONS = [
   {
@@ -30,6 +30,11 @@ const SECTIONS = [
   },
 ];
 
+const languageOptions = {
+  en: "English",
+  da: "Danish",
+};
+
 export default function SettingsScreen() {
   const [form, setForm] = useState({
     language: "English",
@@ -41,6 +46,12 @@ export default function SettingsScreen() {
     email: "",
     avatar: "",
   });
+
+const [showLanguageOptions, setShowLanguageOptions] = useState(false);
+const toggleLanguage = () => {
+  setShowLanguageOptions(!showLanguageOptions);
+};
+
 
   useEffect(() => {
     // Fetch user data from randomuser.me API
@@ -63,6 +74,9 @@ export default function SettingsScreen() {
   const toggleDarkMode = () => {
     setForm({ ...form, darkMode: !form.darkMode });
   };
+
+  
+  const navigation = useNavigation();
 
   // Define styles for light mode
   const lightStyles = StyleSheet.create({
@@ -95,9 +109,6 @@ export default function SettingsScreen() {
     },
   });
 
-  const navigation = useNavigation(); // Get access to the navigation object
-  // look and css taken from website
-
   return (
     <SafeAreaView
       style={form.darkMode ? darkStyles.container : lightStyles.container}
@@ -110,7 +121,7 @@ export default function SettingsScreen() {
               : [styles.header, styles.lightTopBar],
           ]}
         >
-          <Text style={[styles.title, darkStyles.whiteText]}>Settings</Text>
+          <Text style={[styles.title, darkStyles.whiteText]}>Your settings</Text>
         </View>
 
         <View
@@ -217,8 +228,19 @@ export default function SettingsScreen() {
                         } else {
                           console.log("Toggled");
                         }
-                      }}
-                    >
+                      }}>
+                      <TouchableOpacity onPress={() => {
+                        if (type === "toggle") {
+                          toggleDarkMode();
+                        } else if (type === "link" && id === "contact") {
+                          // Navigate to the "Contact Us" screen when "Contact Us" is pressed
+                          navigation.navigate("Contact Us");
+                        } else {
+                          console.log("Toggled");
+                        }
+                      }}> 
+                     
+                      </TouchableOpacity>
                       <View style={styles.row}>
                         <FeatherIcon
                           color={form.darkMode ? "#fff" : "#616161"}
@@ -239,15 +261,40 @@ export default function SettingsScreen() {
                         <View style={styles.rowSpacer} />
 
                         {type === "select" && (
-                          <Text
-                            style={[
-                              styles.rowValue,
-                              { color: form.darkMode ? "#fff" : "#616161" },
-                            ]}
-                          >
-                            {form[id]}
-                          </Text>
-                        )}
+  <TouchableOpacity onPress={toggleLanguage}>
+  <Text
+    style={[
+      styles.rowValue,
+      { color: form.darkMode ? "#fff" : "#616161" },
+    ]}
+  >
+    {languageOptions[form.language]}
+  </Text>
+</TouchableOpacity>
+
+)}
+{showLanguageOptions && type === "select" && (
+  <View style={styles.languageOptions}>
+    {Object.keys(languageOptions).map((key) => (
+      <TouchableOpacity
+        key={key}
+        onPress={() => {
+          setForm({ ...form, language: key });
+          setShowLanguageOptions(false); // Close the language options
+        }}
+      >
+        <Text
+          style={[
+            styles.rowValue,
+            { color: form.darkMode ? "#fff" : "#616161" },
+          ]}
+        >
+          {languageOptions[key]}
+        </Text>
+      </TouchableOpacity>
+    ))}
+  </View>
+)}
 
                         {type === "toggle" && (
                           <Switch
@@ -380,5 +427,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     flexShrink: 1,
     flexBasis: 0,
+  },
+  languageOptions: {
+    backgroundColor: "#fff",
+    borderColor: "#e3e3e3",
+    borderWidth: 1,
+    position: "absolute",
+    top: 50, // Adjust this position as needed
+    right: 10, // Adjust this position as needed
+    width: 150, // Adjust the width as needed
+    zIndex: 1, // Ensure it's above other elements
   },
 });
