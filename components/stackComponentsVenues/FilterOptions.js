@@ -60,11 +60,13 @@ const filters = {
 };
 
 const FilterOptions = ({ route }) => {
+  // Henter 'chosenFilter' fra 'route.params'. Dette angiver den valgte filtertype.
   const { chosenFilter } = route.params;
+  // Henter de data, der skal vises for den valgte filtertype. Hvis der ikke findes data for den valgte filter, bruges en tom array.
   const dataToShow = filters[chosenFilter] || [];
-
+  // Bruger Reacts 'useState' til at oprette en state variabel 'checkedItems'. Denne variabel holder styr på de valgte filterelementer.
   const [checkedItems, setCheckedItems] = useState([]);
-
+  // Til at tilføje eller fjerne et element fra 'checkedItems'.
   const toggleCheck = (item) => {
     if (checkedItems.includes(item)) {
       setCheckedItems((prevItems) => prevItems.filter((i) => i !== item));
@@ -72,7 +74,7 @@ const FilterOptions = ({ route }) => {
       setCheckedItems((prevItems) => [...prevItems, item]);
     }
   };
-
+  // 'applyFilter' funktionen skal bruges til at anvende de valgte filtre. I denne version udskrives de valgte elementer blot til konsollen.
   const applyFilter = () => {
     console.log("Checked Items:", checkedItems);
   };
