@@ -67,13 +67,14 @@ const VenueList = ({ navigation }) => {
           onPress={() => navController(navigation, "Filter")}
         />
         {VenueData.map((item, index) => (
-          <TouchableHighlight
-            style={styles.button}
-            key={index}
-            onPress={() => navigation.navigate("VenueDetails", { venue: item })}
-          >
-            <Text style={styles.h1}>{item.venueName}</Text>
-          </TouchableHighlight>
+         <TouchableHighlight
+         style={styles.button}
+         key={index}
+         onPress={() => navigation.navigate("VenueDetails", { venueName: item.venueName, venue: item })}
+       >
+         <Text style={styles.h1}>{item.venueName}</Text>
+       </TouchableHighlight>
+       
         ))}
       </ScrollView>
     </View>
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#FF0000",
+    backgroundColor: "#d1f1ff",
     flex: 1,
   },
   h1: {

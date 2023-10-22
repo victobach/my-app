@@ -52,7 +52,6 @@ const toggleLanguage = () => {
   setShowLanguageOptions(!showLanguageOptions);
 };
 
-
   useEffect(() => {
     // Fetch user data from randomuser.me API
     fetch("https://randomuser.me/api/")
@@ -75,7 +74,6 @@ const toggleLanguage = () => {
     setForm({ ...form, darkMode: !form.darkMode });
   };
 
-  
   const navigation = useNavigation();
 
   // Define styles for light mode
