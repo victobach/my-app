@@ -8,10 +8,9 @@ import {
   Image,
   TouchableOpacity,
   Switch,
-  Button,
 } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
-import { useNavigation } from "@react-navigation/native"; 
+import { useNavigation } from "@react-navigation/native";
 
 const SECTIONS = [
   {
@@ -47,10 +46,11 @@ export default function SettingsScreen() {
     avatar: "",
   });
 
-const [showLanguageOptions, setShowLanguageOptions] = useState(false);
-const toggleLanguage = () => {
-  setShowLanguageOptions(!showLanguageOptions);
-};
+  const [showLanguageOptions, setShowLanguageOptions] = useState(false);
+
+  const toggleLanguage = () => {
+    setShowLanguageOptions(!showLanguageOptions);
+  };
 
   useEffect(() => {
     // Fetch user data from randomuser.me API
@@ -76,7 +76,6 @@ const toggleLanguage = () => {
 
   const navigation = useNavigation();
 
-  // Define styles for light mode
   const lightStyles = StyleSheet.create({
     container: {
       paddingVertical: 24,
@@ -84,26 +83,22 @@ const toggleLanguage = () => {
     },
   });
 
-  // Define styles for dark mode
   const darkStyles = StyleSheet.create({
     container: {
       paddingVertical: 24,
       backgroundColor: "#121212",
     },
     sectionHeader: {
-      // Update the background color for section headers in dark mode
       backgroundColor: "#121212",
     },
     rowWrapper: {
-      // Update the background color for row wrappers in dark mode
-      backgroundColor: "#121212", //
+      backgroundColor: "#121212",
     },
-    // Styles for the black top bar
     blackTopBar: {
-      backgroundColor: "#000", // Black background
+      backgroundColor: "#000",
     },
     whiteText: {
-      color: "#fff", // White text color
+      color: "#fff",
     },
   });
 
@@ -212,7 +207,7 @@ const toggleLanguage = () => {
                     key={id}
                     style={[
                       styles.rowWrapper,
-                      form.darkMode && darkStyles.rowWrapper, // Apply dark mode style when darkMode is true
+                      form.darkMode && darkStyles.rowWrapper,
                       index === 0 && { borderTopWidth: 0 },
                     ]}
                   >
@@ -221,24 +216,14 @@ const toggleLanguage = () => {
                         if (type === "toggle") {
                           toggleDarkMode();
                         } else if (type === "link" && id === "bug") {
-                          // Navigate to the "Report Bug" screen when "Report Bug" is pressed
                           navigation.navigate("Report Bug");
-                        } else {
-                          console.log("Toggled");
-                        }
-                      }}>
-                      <TouchableOpacity onPress={() => {
-                        if (type === "toggle") {
-                          toggleDarkMode();
                         } else if (type === "link" && id === "contact") {
-                          // Navigate to the "Contact Us" screen when "Contact Us" is pressed
-                          navigation.navigate("Contact Us");
+                          navigation.navigate("ContactUs");
                         } else {
                           console.log("Toggled");
                         }
-                      }}> 
-                     
-                      </TouchableOpacity>
+                      }}
+                    >
                       <View style={styles.row}>
                         <FeatherIcon
                           color={form.darkMode ? "#fff" : "#616161"}
@@ -259,48 +244,45 @@ const toggleLanguage = () => {
                         <View style={styles.rowSpacer} />
 
                         {type === "select" && (
-  <TouchableOpacity onPress={toggleLanguage}>
-  <Text
-    style={[
-      styles.rowValue,
-      { color: form.darkMode ? "#fff" : "#616161" },
-    ]}
-  >
-    {languageOptions[form.language]}
-  </Text>
-</TouchableOpacity>
-
-)}
-{showLanguageOptions && type === "select" && (
-  <View style={styles.languageOptions}>
-    {Object.keys(languageOptions).map((key) => (
-      <TouchableOpacity
-        key={key}
-        onPress={() => {
-          setForm({ ...form, language: key });
-          setShowLanguageOptions(false); // Close the language options
-        }}
-      >
-        <Text
-          style={[
-            styles.rowValue,
-            { color: form.darkMode ? "#fff" : "#616161" },
-          ]}
-        >
-          {languageOptions[key]}
-        </Text>
-      </TouchableOpacity>
-    ))}
-  </View>
-)}
-
+                          <TouchableOpacity onPress={toggleLanguage}>
+                            <Text
+                              style={[
+                                styles.rowValue,
+                                { color: form.darkMode ? "#fff" : "#616161" },
+                              ]}
+                            >
+                              {languageOptions[form.language]}
+                            </Text>
+                          </TouchableOpacity>
+                        )}
+                        {showLanguageOptions && type === "select" && (
+                          <View style={styles.languageOptions}>
+                            {Object.keys(languageOptions).map((key) => (
+                              <TouchableOpacity
+                                key={key}
+                                onPress={() => {
+                                  setForm({ ...form, language: key });
+                                  setShowLanguageOptions(false);
+                                }}
+                              >
+                                <Text
+                                  style={[
+                                    styles.rowValue,
+                                    { color: form.darkMode ? "#fff" : "#616161" },
+                                  ]}
+                                >
+                                  {languageOptions[key]}
+                                </Text>
+                              </TouchableOpacity>
+                            ))}
+                          </View>
+                        )}
                         {type === "toggle" && (
                           <Switch
                             onChange={toggleDarkMode}
                             value={form.darkMode}
                           />
                         )}
-
                         {(type === "select" || type === "link") && (
                           <FeatherIcon
                             color={form.darkMode ? "#fff" : "#ababab"}
@@ -322,6 +304,9 @@ const toggleLanguage = () => {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    padding: 24,
+  },
   section: {
     paddingTop: 12,
   },
@@ -347,7 +332,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f6f6f6",
   },
   lightTopBar: {
-    backgroundColor: "#f6f6f6", // Light mode background color
+    backgroundColor: "#f6f6f6",
   },
   title: {
     fontSize: 32,
@@ -431,9 +416,9 @@ const styles = StyleSheet.create({
     borderColor: "#e3e3e3",
     borderWidth: 1,
     position: "absolute",
-    top: 50, // Adjust this position as needed
-    right: 10, // Adjust this position as needed
-    width: 150, // Adjust the width as needed
-    zIndex: 1, // Ensure it's above other elements
+    top: 50,
+    right: 10,
+    width: 150,
+    zIndex: 1,
   },
 });

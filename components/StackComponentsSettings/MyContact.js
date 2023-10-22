@@ -1,3 +1,5 @@
+
+
 import React, { useState } from "react";
 import { TextInput, View, Text, StyleSheet, TouchableOpacity, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -31,7 +33,7 @@ const sendEmail = async (to, subject, body, options = {}) => {
     return Linking.openURL(url);
 };
 
-export default function MyBugScreen({ navigation }) {
+export default function ContactUsScreen({ navigation }) {
     const [message, setMessage] = useState("");
     const [showCharacterCount, setShowCharacterCount] = useState(false);
     const [submissionMessage, setSubmissionMessage] = useState("");
@@ -53,11 +55,11 @@ export default function MyBugScreen({ navigation }) {
                 // Use the sendEmail function to send an email
                 await sendEmail(
                     'Thenightowl.noreply@gmail.com',
-                    'Bug Report',
+                    'Contact Us',
                     message
                 );
 
-                setSubmissionMessage('Thank you for your bug report!');
+                setSubmissionMessage('Thank you for your message!');
                 setIsError(false);
             } catch (error) {
                 console.error(error);
@@ -83,8 +85,7 @@ export default function MyBugScreen({ navigation }) {
             </View>
             <View style={styles.content}>
                 <Text style={styles.bugText}>
-                    If you're having trouble with anything or want to report a bug, this
-                    is the place to do it.
+                    If you Want to contact us, please write a message!
                 </Text>
                 <TextInput
                     style={styles.input}
