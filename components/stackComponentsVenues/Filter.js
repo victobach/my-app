@@ -40,11 +40,10 @@ const Filter = ({ navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-  // Definering af vores stylesheet
   container: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#FF0000", // Rød baggrund
+    backgroundColor: "#d1f1ff",
     flex: 1,
   },
   h1: {
