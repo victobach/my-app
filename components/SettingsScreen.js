@@ -52,6 +52,8 @@ export default function SettingsScreen() {
     setShowLanguageOptions(!showLanguageOptions);
   };
 
+  
+
   useEffect(() => {
     // Fetch user data from randomuser.me API
     fetch("https://randomuser.me/api/")
