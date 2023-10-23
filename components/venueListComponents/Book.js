@@ -13,7 +13,7 @@ export default function Book({ route, navigation }) {
   const [contactNumber, setContactNumber] = useState("");
 
   const makePhoneCall = () => {
-    const phoneNumber = "+45 52410056"; // Replace with the desired phone number
+    const phoneNumber = "+4552410056"; // Replace with the desired phone number
     Linking.openURL(`tel:${phoneNumber}`);
   };
 
@@ -69,7 +69,7 @@ export default function Book({ route, navigation }) {
       />
       <Text style={styles.phoneNumberLabel}>Or prefer to call?</Text>
       <Text style={styles.phoneNumber} onPress={makePhoneCall}>
-        +45 52410056
+        +4552410056
       </Text>
       <View style={styles.buttons}>
         <Button title="Submit Reservation" onPress={sendDataToFirebase} />
