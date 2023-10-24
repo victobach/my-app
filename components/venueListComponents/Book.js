@@ -73,10 +73,6 @@ export default function Book({ route, navigation }) {
       </Text>
       <View style={styles.buttons}>
         <Button title="Submit Reservation" onPress={sendDataToFirebase} />
-        <Button
-          title="All Venues"
-          onPress={() => navController(navigation, "AllVenues")}
-        />
         <Button title="Back" onPress={() => navigation.goBack()} />
       </View>
       <Text style={styles.filters}>Filters and Options</Text>
