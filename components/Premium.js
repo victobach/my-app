@@ -65,9 +65,12 @@ const rewards = [
   },
 ];
 
-function RewardItem({ reward, onPress }) {
+function RewardItem({ reward, navigation }) {
   return (
-    <TouchableOpacity onPress={() => onPress(reward)} style={styles.rewardItem}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("Premium_Single_Product", { reward })}
+      style={styles.rewardItem}
+    >
       <Image
         source={{
           uri: reward.image,
@@ -82,18 +85,14 @@ function RewardItem({ reward, onPress }) {
   );
 }
 
-export default function Premium() {
-  const handleRewardPress = (reward) => {
-    console.log(`You have selected the ${reward.name}.`);
-  };
-
+export default function Premium({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Battlepass coming soon!</Text>
       <Text style={styles.subtitle}>Get Premium</Text>
       <ScrollView style={styles.scrollView}>
         {rewards.map((reward, index) => (
-          <RewardItem key={index} reward={reward} onPress={handleRewardPress} />
+          <RewardItem key={index} reward={reward} navigation={navigation} />
         ))}
       </ScrollView>
     </View>
