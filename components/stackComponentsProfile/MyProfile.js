@@ -9,7 +9,7 @@ import {
   Button,
 } from "react-native";
 import { getFirestore, doc, getDoc } from "firebase/firestore/lite";
-import QRCode from "react-native-qrcode-svg";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 // Firebase credentials
 const firebaseConfig = {
@@ -31,50 +31,23 @@ const firestore = getFirestore();
 const MinProfil = ({ navigation }) => {
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [qrCodeData, setQRCodeData] = useState("");
-  const [showQRCode, setShowQRCode] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const fetchProfileData = async () => {
-      try {
-        const profileRef = doc(firestore, "MyProfile", "MyProfile"); // My document ID's
-        const docSnapshot = await getDoc(profileRef);
-
-        if (docSnapshot.exists()) {
-          const email = docSnapshot.data().Email;
-          setProfileData(docSnapshot.data());
-          setQRCodeData(email);
-        }
-      } catch (error) {
-        console.error("Error fetching profile data:", error); // Error-handling
-      } finally {
-        setLoading(false);
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        navigation.navigate("LoginNavigator", { screen: "Login" });
       }
-    };
+    });
 
-    fetchProfileData();
-  }, []);
-
-  const toggleQRCode = () => {
-    setShowQRCode(!showQRCode);
-  };
-
-  if (loading) {
-    return <ActivityIndicator size="large" />;
-  }
-
-  if (!profileData) {
-    return <Text>Error fetching profile data</Text>;
-  }
+    return unsubscribe; // Cleanup subscription on unmount
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={toggleQRCode}>
-        <Text style={styles.buttonText}>
-          {showQRCode ? "Hide QR Code" : "Show QR Code"}
-        </Text>
-      </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Favorites")}
@@ -95,27 +68,26 @@ const MinProfil = ({ navigation }) => {
           navigation.navigate("SettingsNavigator", { screen: "Settings" })
         }
       >
-        <Text style={styles.buttonText}>Settings⚙️</Text>
+        <Text style={styles.buttonText}>Change my details</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.button}
         onPress={() =>
-          navigation.navigate("LoginNavigator", { screen: "Login" })
+          navigation.navigate("SettingsNavigator", { screen: "Report Bug" })
         }
       >
-        <Text style={styles.buttonText}>Log in</Text>
+        <Text style={styles.buttonText}>Report a bug</Text>
       </TouchableOpacity>
 
-      <Text style={styles.headerText}>My Profile:</Text>
-      <Text style={styles.profileText}>Age: {profileData.Age}</Text>
-      <Text style={styles.profileText}>Email: {profileData.Email}</Text>
-      <Text style={styles.profileText}>Full Name: {profileData.FullName}</Text>
-      <Text style={styles.profileText}>
-        Mobile Number: {profileData.Mobilnummer}
-      </Text>
-      <Text style={styles.profileText}>User Name: {profileData.UserName}</Text>
-
-      {showQRCode && <QRCode value={qrCodeData} size={200} />}
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>
+          navigation.navigate("SettingsNavigator", { screen: "ContactUs" })
+        }
+      >
+        <Text style={styles.buttonText}>Contact Us</Text>
+      </TouchableOpacity>
     </View>
   );
 };

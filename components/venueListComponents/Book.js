@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Linking } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  Linking, Alert,
+} from "react-native";
 import { initializeApp } from "firebase/app";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
 
@@ -8,8 +15,19 @@ const navController = (navigation, route) => {
 };
 
 export default function Book({ route, navigation }) {
-  const [venuePlace, setVenuePlace] = useState("");
+//confirmation alert
+  const showAlert = () => {
+    Alert.alert(
+      "Thank you for booking",
+      "Your booking request has been sent to the venue",
+      [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+      { cancelable: false }
+    );
+  };
+
+  const { venueName, venue } = route.params;
   const [contactName, setContactName] = useState("");
+  const [guestNumber, setGuestNumber] = useState("");
   const [contactNumber, setContactNumber] = useState("");
 
   const makePhoneCall = () => {
@@ -32,15 +50,16 @@ export default function Book({ route, navigation }) {
   const sendDataToFirebase = async () => {
     const firestore = getFirestore();
     await setDoc(doc(firestore, "venues", "venue_id"), {
-      place: venuePlace,
+      place: venueName,
       contact: {
         name: contactName,
+        numberOfGuests: guestNumber,
         phoneNumber: contactNumber,
       },
     });
     // Clear the input fields after sending data
-    setVenuePlace("");
     setContactName("");
+    setGuestNumber("");
     setContactNumber("");
   };
 
@@ -48,11 +67,11 @@ export default function Book({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Reserve a Table</Text>
+      <Text style={styles.title}>Reserve a table</Text>
       <TextInput
         placeholder="Number of Guests"
-        value={venuePlace}
-        onChangeText={(text) => setVenuePlace(text)}
+        value={guestNumber}
+        onChangeText={(text) => setGuestNumber(text)}
         style={styles.input}
       />
       <TextInput
@@ -67,15 +86,13 @@ export default function Book({ route, navigation }) {
         onChangeText={(text) => setContactNumber(text)}
         style={styles.input}
       />
-      <Text style={styles.phoneNumberLabel}>Or prefer to call?</Text>
-      <Text style={styles.phoneNumber} onPress={makePhoneCall}>
-        +4552410056
-      </Text>
       <View style={styles.buttons}>
-        <Button title="Submit Reservation" onPress={sendDataToFirebase} />
+        <Button title="Submit Reservation" onPress={() => {
+        sendDataToFirebase();
+        showAlert();
+    }}  />
         <Button title="Back" onPress={() => navigation.goBack()} />
       </View>
-      <Text style={styles.filters}>Filters and Options</Text>
     </View>
   );
 }

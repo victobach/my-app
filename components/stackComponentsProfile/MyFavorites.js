@@ -1,7 +1,15 @@
-import { initializeApp } from 'firebase/app';
-import React, { useState, useEffect } from 'react';
-import { View, Text, ActivityIndicator, Button, StyleSheet } from 'react-native';
-import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
+import { initializeApp } from "firebase/app";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Button,
+  StyleSheet,
+  TouchableHighlight,
+} from "react-native";
+import { getFirestore, doc, getDoc } from "firebase/firestore/lite";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
@@ -14,35 +22,54 @@ const firebaseConfig = {
   appId: "1:378823600165:web:3c7edb88d421c4aed177cc",
   measurementId: "G-HRRR03JBJL",
 };
-
+const navController = (navigation, route) => {
+  navigation.navigate(route);
+};
 initializeApp(firebaseConfig);
-
-const firestore = getFirestore();
 
 const MyFavorites = ({ navigation }) => {
   const [FavoritesData, setFavoritesData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const fetchFavoritesData = async () => {
-      try {
-        const FavoritesRef = doc(firestore, 'MyFavorites', 'MyFavorites'); // Replace with your actual document ID
-        const docSnapshot = await getDoc(FavoritesRef);
-
-        if (docSnapshot.exists()) {
-          setFavoritesData(docSnapshot.data());
-        }
-      } catch (error) {
-        console.error('Error fetching favorites data:', error);
-      } finally {
-        setLoading(false);
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        navigation.navigate("LoginNavigator", { screen: "Login" });
       }
-    };
+    });
 
-    fetchFavoritesData();
-  }, []);
+    return unsubscribe; // Cleanup subscription on unmount
+  }, [navigation]);
 
-  if (loading) {
+  useEffect(() => {
+    if (isAuthenticated) {
+      const fetchFavoritesData = async () => {
+        try {
+          const firestore = getFirestore();
+          const auth = getAuth();
+          const user = auth.currentUser;
+          const FavoritesRef = doc(firestore, "userFavorites", user.uid);
+          const docSnapshot = await getDoc(FavoritesRef);
+
+          if (docSnapshot.exists()) {
+            setFavoritesData(docSnapshot.data());
+          }
+        } catch (error) {
+          console.error("Error fetching favorites data:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchFavoritesData();
+    }
+  }, [isAuthenticated]);
+
+  if (!isAuthenticated || loading) {
     return <ActivityIndicator size="large" />;
   }
 
@@ -52,10 +79,16 @@ const MyFavorites = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>My Favorites:</Text>
-      <Text style={styles.favoriteText}>Favorite 1: {FavoritesData.MyFavorite_1}</Text>
-      <Text style={styles.favoriteText}>Favorite 2: {FavoritesData.MyFavorite_2}</Text>
-    </View>
+    {Object.values(FavoritesData).map((item, index) => (
+      <TouchableHighlight
+        style={styles.button}
+        key={index}
+        onPress={() => navigation.navigate("VenueDetails", { venueName: item.venueName, venue: item })}
+      >
+        <Text style={styles.h1}>{item.venueName}</Text>
+      </TouchableHighlight>
+    ))}
+  </View>
   );
 };
 
@@ -68,9 +101,9 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 24,
-    fontWeight: 'bold',
-    fontFamily: 'Arial',
-    color: 'blue',
+    fontWeight: "bold",
+    fontFamily: "Arial",
+    color: "blue",
     marginTop: 20,
     marginBottom: 10,
   },

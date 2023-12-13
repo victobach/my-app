@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,7 +7,10 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+const navController = (navigation, route) => {
+  navigation.navigate(route);
+};
 const rewards = [
   {
     name: "10% Coupon",
@@ -66,6 +69,21 @@ const rewards = [
 ];
 
 function RewardItem({ reward, navigation }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsAuthenticated(true);
+      } else {
+        navigation.navigate("LoginNavigator", { screen: "Login" });
+      }
+    });
+
+    return unsubscribe; // Cleanup subscription on unmount
+  }, [navigation]);
+
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("Premium_Single_Product", { reward })}

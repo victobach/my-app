@@ -10,27 +10,30 @@ import {
 } from "react-native"; // Import Alert from "react-native"
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+//new add
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
 
-const firebaseConfig = {
-  apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
-  authDomain: "innovationogtekt.firebaseapp.com",
-  databaseURL:
-    "https://innovationogtekt-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "innovationogtekt",
-  storageBucket: "innovationogtekt.appspot.com",
-  messagingSenderId: "378823600165",
-  appId: "1:378823600165:web:3c7edb88d421c4aed177cc",
-  measurementId: "G-HRRR03JBJL",
-};
-
-initializeApp(firebaseConfig);
-const auth = getAuth();
-
 export default function SignUpScreen({ navigation }) {
+  const firebaseConfig = {
+    apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
+    authDomain: "innovationogtekt.firebaseapp.com",
+    databaseURL:
+      "https://innovationogtekt-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "innovationogtekt",
+    storageBucket: "innovationogtekt.appspot.com",
+    messagingSenderId: "378823600165",
+    appId: "1:378823600165:web:3c7edb88d421c4aed177cc",
+    measurementId: "G-HRRR03JBJL",
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const firestore = getFirestore(app);
+  const auth = getAuth();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -45,6 +48,11 @@ export default function SignUpScreen({ navigation }) {
         password
       );
       const user = userCredential.user;
+      //new add
+
+      const userFavoritesRef = doc(firestore, "userFavorites", user.uid);
+      await setDoc(userFavoritesRef, {}); // Initialize with an empty object
+      //_____
       console.log("User created:", user.uid);
       navigation.navigate("Login");
     } catch (error) {

@@ -16,7 +16,6 @@ const StackNavigatorSettings = () => {
         headerShown: false,
       }}
     >
-      <Stack.Screen name="Settings" component={SettingsScreen} />
       <Stack.Screen name="EditUser" component={EditUser} />
       <Stack.Screen name="ContactUs" component={MyContactScreen} />
       <Stack.Screen name="Report Bug" component={MyBugScreen} />

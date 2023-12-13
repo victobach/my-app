@@ -36,6 +36,8 @@ const filters = {
   "Live Music": ["Yes, frequently", "Occasionally", "No live music"],
   "Music Genre": [
     "Rock",
+    "Classical",
+    "Blues",
     "Pop",
     "Jazz",
     "Electronic",

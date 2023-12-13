@@ -5,7 +5,8 @@ import StackNavigatorVenues from "./components/StackNavigatorVenues";
 import { createStackNavigator } from "@react-navigation/stack";
 import StackNavigatorPremium from "./components/StackNavigatorPremium";
 import StackNavigatorProfile from "./components/StackNavigatorProfile";
-import MyFavorites from "./components/stackComponentsProfile/MyFavorites";
+import StackNavigatorFavorites from "./components/StackNavigatorFavorites";
+
 import { View, StyleSheet } from "react-native";
 
 const Tab = createBottomTabNavigator();
@@ -24,7 +25,7 @@ export default function App() {
       <NavigationContainer>
         <Tab.Navigator>
           <Tab.Screen name="Venues" component={StackNavigatorVenues} />
-          <Tab.Screen name="Favorites" component={MyFavorites} />
+          <Tab.Screen name="Favorites" component={StackNavigatorFavorites} />
           <Tab.Screen name="Premium" component={StackNavigatorPremium} />
           <Tab.Screen name="Profile" component={StackNavigatorProfile} />
         </Tab.Navigator>

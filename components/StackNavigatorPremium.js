@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Premium from "./Premium";
 
 import SingleProductScreen from "./StackComponentsPremium/SingleProductScreen";
+import StackNavigatorLogin from "./StackNavigatorLogin";
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,7 @@ function StackNavigatorProfile() {
         component={SingleProductScreen}
         name="Premium_Single_Product"
       />
+      <Stack.Screen name="LoginNavigator" component={StackNavigatorLogin} />
     </Stack.Navigator>
   );
 }
