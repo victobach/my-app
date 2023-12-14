@@ -13,25 +13,25 @@ const navController = (navigation, route) => {
 };
 const rewards = [
   {
-    name: "10% Coupon",
+    name: "10% Coupon all night",
     tablesRequired: 5,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp",
   },
   {
-    name: "Free Appetizer",
+    name: "Customized drink",
     tablesRequired: 10,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp",
   },
   {
-    name: "20% Off Your Next Meal",
+    name: "Skip the line",
     tablesRequired: 15,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path
   },
   {
-    name: "Complimentary Dessert",
+    name: "Invited to exclusive events",
     tablesRequired: 20,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path
@@ -43,25 +43,25 @@ const rewards = [
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path
   },
   {
-    name: "50% Off Any Dish",
+    name: "50% off drinks before midnight",
     tablesRequired: 40,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path
   },
   {
-    name: "Dinner for Two",
+    name: "Free beer all night",
     tablesRequired: 50,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path
   },
   {
-    name: "Exclusive Chef's Table Reservation",
+    name: "Wall of Fame",
     tablesRequired: 75,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path
   },
   {
-    name: "Weekend Getaway Package",
+    name: "Complete merchandise package",
     tablesRequired: 100,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path
@@ -106,8 +106,8 @@ function RewardItem({ reward, navigation }) {
 export default function Premium({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Battlepass coming soon!</Text>
-      <Text style={styles.subtitle}>Get Premium</Text>
+      <Text style={styles.title}>Premium</Text>
+      <Text style={styles.title}>For only 39 kr an month</Text>
       <ScrollView style={styles.scrollView}>
         {rewards.map((reward, index) => (
           <RewardItem key={index} reward={reward} navigation={navigation} />

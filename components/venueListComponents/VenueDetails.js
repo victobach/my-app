@@ -52,20 +52,25 @@ const VenueDetails = ({ route, navigation }) => {
     <View style={styles.container}>
       <Button
         title="Booking"
-        onPress={() => navigation.navigate("Book", { venueName: venue.venueName, venue: venue })}
+        onPress={() =>
+          navigation.navigate("Book", {
+            venueName: venue.venueName,
+            venue: venue,
+          })
+        }
       />
       <Button title="Add to Favorites" onPress={addToFavorites} />
       <Text style={styles.header}>{venueName}</Text>
-      <Text style={styles.h2}>{venue.adress}</Text>
-      <Text style={styles.h2}>{venue.ageReg}</Text>
-      <Text style={styles.h2}>{venue.atmosphere}</Text>
-      <Text style={styles.h2}>{venue.capacity}</Text>
-      <Text style={styles.h2}>{venue.description}</Text>
-      <Text style={styles.h2}>{venue.liveMusic}</Text>
-      <Text style={styles.h2}>{venue.musicGenre}</Text>
-      <Text style={styles.h2}>{venue.openingHours}</Text>
-      <Text style={styles.h2}>{venue.price}</Text>
-      <Text style={styles.h2}>{venue.tableService}</Text>
+      <Text style={styles.h2}>Address {venue.address}</Text>
+      <Text style={styles.h2}>Age requirement {venue.ageRequirement}</Text>
+      <Text style={styles.h2}>Atmosphere {venue.atmosphere}</Text>
+      <Text style={styles.h2}>Capacity {venue.capacity}</Text>
+      <Text style={styles.h2}>Description {venue.description}</Text>
+      <Text style={styles.h2}>Live Music {venue.liveMusic}</Text>
+      <Text style={styles.h2}>Music Genre {venue.musicGenre}</Text>
+      <Text style={styles.h2}>Opening Hours {venue.openingHours}</Text>
+      <Text style={styles.h2}>Price {venue.price}</Text>
+      <Text style={styles.h2}>Table Service {venue.tableService}</Text>
     </View>
   );
 };
