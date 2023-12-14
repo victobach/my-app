@@ -60,8 +60,10 @@ const filters = {
   ],
   "Table Service": ["Available", "Not available"],
 };
-
-const FilterOptions = ({ route }) => {
+const navController = (navigation, route) => {
+  navigation.navigate(route);
+};
+const FilterOptions = ({ route, navigation }) => {
   // Henter 'chosenFilter' fra 'route.params'. Dette angiver den valgte filtertype.
   const { chosenFilter } = route.params;
   // Henter de data, der skal vises for den valgte filtertype. Hvis der ikke findes data for den valgte filter, bruges en tom array.
@@ -78,7 +80,12 @@ const FilterOptions = ({ route }) => {
   };
   // 'applyFilter' funktionen skal bruges til at anvende de valgte filtre. I denne version udskrives de valgte elementer blot til konsollen.
   const applyFilter = () => {
-    console.log("Checked Items:", checkedItems);
+    // Create a list of filters in the format "Category: Value"
+    const formattedFilters = checkedItems.map(
+      (item) => `${chosenFilter}: ${item}`
+    );
+    navigation.navigate("VenueList", { selectedFilters: formattedFilters });
+    console.log(formattedFilters);
   };
 
   return (

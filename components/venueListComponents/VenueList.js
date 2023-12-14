@@ -24,18 +24,22 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
 
 //import af data fra firebase til array
-const VenueList = ({ navigation }) => {
+const VenueList = ({ navigation, route }) => {
   const [VenueData, setVenueData] = useState([]);
+  const [appliedFilters, setAppliedFilters] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Merge new filters from the route, if any
+    const newFilters = route.params?.selectedFilters || [];
+    setAppliedFilters(prev => [...new Set([...prev, ...newFilters])]);
+
+    // Fetch venue data
     const fetchVenueData = async () => {
       try {
         const VenueListRef = collection(firestore, "VenueList");
         const querySnapshot = await getDocs(VenueListRef);
-
-        const venueDataArray = querySnapshot.docs.map((doc) => doc.data());
-
+        const venueDataArray = querySnapshot.docs.map(doc => doc.data());
         setVenueData(venueDataArray);
         setLoading(false);
       } catch (error) {
@@ -45,40 +49,67 @@ const VenueList = ({ navigation }) => {
     };
 
     fetchVenueData();
-  }, [firestore]);
+  }, [firestore, route.params?.selectedFilters]);
 
   if (loading) {
     return <ActivityIndicator size="large" />;
   }
 
-  if (VenueData.length === 0) {
-    return <Text>Error fetching Venue data</Text>;
+  // Filter the venue data
+  const filterMappings = {
+    Area: 'Area',
+    "Age Requirement": 'Age Requirement',
+    Atmosphere: 'Atmosphere',
+    Capacity: 'Capacity',
+    "Live Music": 'Live Music',
+    "Music Genre": 'Music Genre',
+    "Opening Hours": 'Opening Hours',
+    Price: 'Price',
+    "Table Service": 'Table Service'
+  };
+  
+// Group filters by category
+const groupedFilters = appliedFilters.reduce((acc, filter) => {
+  const [category, value] = filter.split(': ');
+  acc[category] = acc[category] || [];
+  acc[category].push(value);
+  return acc;
+}, {});
+
+// Filter the venue data
+const filteredVenueData = VenueData.filter(venue =>
+  Object.entries(groupedFilters).every(([category, values]) => {
+    const venueProperty = filterMappings[category];
+    return venue[venueProperty] && values.some(value => venue[venueProperty].includes(value));
+  })
+);
+  
+  if (filteredVenueData.length === 0) {
+    return (
+      <View style={styles.container}>
+        <Button title="No Venues Match! Remove Filters?" onPress={() => setAppliedFilters([])} />
+      </View>
+    );
   }
-  //view fyld
-  return (
-    <View style={styles.container}>
-      <ScrollView>
-        <Button
-          title="Venue Map"
-          onPress={() => navController(navigation, "Venue Map")}
-        />
-        <Button
-          title="Filter"
-          onPress={() => navController(navigation, "Filter")}
-        />
-        {VenueData.map((item, index) => (
-         <TouchableHighlight
-         style={styles.button}
-         key={index}
-         onPress={() => navigation.navigate("VenueDetails", { venueName: item.venueName, venue: item })}
-       >
-         <Text style={styles.h1}>{item.venueName}</Text>
-       </TouchableHighlight>
-       
-        ))}
-      </ScrollView>
-    </View>
-  );
+
+// Render the venue list
+return (
+  <View style={styles.container}>
+    <ScrollView>
+      {/* Navigation buttons */}
+      <Button title="Venue Map" onPress={() => navController(navigation, "Venue Map")} />
+      <Button title="Filter" onPress={() => navController(navigation, "Filter")} />
+      <Button title="Remove Filters" onPress={() => setAppliedFilters([])} />
+
+      {/* Venue list */}
+      {filteredVenueData.map((item, index) => (
+        <TouchableHighlight key={index} style={styles.button} onPress={() => navigation.navigate("VenueDetails", { venueName: item.venueName, venue: item })}>
+          <Text style={styles.h1}>{item.venueName}</Text>
+        </TouchableHighlight>
+      ))}
+    </ScrollView>
+  </View>
+);
 };
 
 const styles = StyleSheet.create({

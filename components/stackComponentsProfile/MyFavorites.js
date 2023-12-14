@@ -8,7 +8,7 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from "react-native";
-import { getFirestore, doc, getDoc } from "firebase/firestore/lite";
+import { getFirestore, doc, getDoc, onSnapshot  } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const firebaseConfig = {
@@ -27,7 +27,7 @@ const navController = (navigation, route) => {
 };
 initializeApp(firebaseConfig);
 
-const MyFavorites = ({ navigation }) => {
+const MyFavorites = ({  route, navigation }) => {
   const [FavoritesData, setFavoritesData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -46,28 +46,33 @@ const MyFavorites = ({ navigation }) => {
   }, [navigation]);
 
   useEffect(() => {
+    let unsubscribe = () => {};
+  
     if (isAuthenticated) {
-      const fetchFavoritesData = async () => {
-        try {
-          const firestore = getFirestore();
-          const auth = getAuth();
-          const user = auth.currentUser;
-          const FavoritesRef = doc(firestore, "userFavorites", user.uid);
-          const docSnapshot = await getDoc(FavoritesRef);
-
+      const firestore = getFirestore();
+      const auth = getAuth();
+      const user = auth.currentUser;
+  
+      if (user) {
+        const FavoritesRef = doc(firestore, "userFavorites", user.uid);
+        unsubscribe = onSnapshot(FavoritesRef, (docSnapshot) => {
           if (docSnapshot.exists()) {
             setFavoritesData(docSnapshot.data());
+          } else {
+            // Handle the case where the document does not exist
+            console.log("No favorites data found");
           }
-        } catch (error) {
-          console.error("Error fetching favorites data:", error);
-        } finally {
           setLoading(false);
-        }
-      };
-
-      fetchFavoritesData();
+        }, (error) => {
+          console.error("Error fetching favorites data:", error);
+          setLoading(false);
+        });
+      }
     }
+  
+    return () => unsubscribe(); // Unsubscribe on unmount
   }, [isAuthenticated]);
+  
 
   if (!isAuthenticated || loading) {
     return <ActivityIndicator size="large" />;

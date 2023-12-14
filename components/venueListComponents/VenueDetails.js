@@ -59,20 +59,22 @@ const VenueDetails = ({ route, navigation }) => {
           })
         }
       />
+  
       <Button title="Add to Favorites" onPress={addToFavorites} />
       <Text style={styles.header}>{venueName}</Text>
-      <Text style={styles.h2}>Address {venue.address}</Text>
-      <Text style={styles.h2}>Age requirement {venue.ageRequirement}</Text>
-      <Text style={styles.h2}>Atmosphere {venue.atmosphere}</Text>
-      <Text style={styles.h2}>Capacity {venue.capacity}</Text>
-      <Text style={styles.h2}>Description {venue.description}</Text>
-      <Text style={styles.h2}>Live Music {venue.liveMusic}</Text>
-      <Text style={styles.h2}>Music Genre {venue.musicGenre}</Text>
-      <Text style={styles.h2}>Opening Hours {venue.openingHours}</Text>
-      <Text style={styles.h2}>Price {venue.price}</Text>
-      <Text style={styles.h2}>Table Service {venue.tableService}</Text>
+      <Text style={styles.h2}>Address: {venue.address}</Text>
+      <Text style={styles.h2}>Area: {venue.Area}</Text>
+      <Text style={styles.h2}>Age Requirement: {venue['Age Requirement']}</Text>
+      <Text style={styles.h2}>Atmosphere: {venue.Atmosphere}</Text>
+      <Text style={styles.h2}>Capacity: {venue.Capacity}</Text>
+      <Text style={styles.h2}>Description: {venue.description}</Text>
+      <Text style={styles.h2}>Live Music: {venue['Live Music']}</Text>
+      <Text style={styles.h2}>Music Genre: {venue['Music Genre']}</Text>
+      <Text style={styles.h2}>Opening Hours: {venue['Opening Hours']}</Text>
+      <Text style={styles.h2}>Price: {venue.Price}</Text>
+      <Text style={styles.h2}>Table Service: {venue['Table Service']}</Text>
     </View>
-  );
+  );  
 };
 
 const styles = StyleSheet.create({
