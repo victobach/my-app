@@ -13,8 +13,8 @@ const navController = (navigation, route) => {
 };
 const rewards = [
   {
-    name: "10% Coupon all night",
-    tablesRequired: 5,
+    name: "10% coupon all night",
+    tablesRequired: 0,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp",
   },
@@ -37,7 +37,7 @@ const rewards = [
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path
   },
   {
-    name: "VIP Lounge Access",
+    name: "VIP lounge access",
     tablesRequired: 30,
     image:
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path

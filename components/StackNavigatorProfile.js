@@ -11,7 +11,6 @@ function StackNavigatorProfile() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Profile" component={MyProfile} />
-      <Stack.Screen name="Reviews" component={MyReviews} />
       <Stack.Screen
         name="SettingsNavigator"
         component={StackNavigatorSettings}

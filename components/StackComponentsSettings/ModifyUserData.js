@@ -19,6 +19,7 @@ import {
 } from "firebase/auth";
 import Modal from "react-native-modal";
 
+const Natugle = require("../../assets/NatUgle.png");
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
@@ -124,49 +125,79 @@ export default function LoginScreen({ navigation }) {
     }
   };
 
+  const {
+    container,
+    logo,
+    button,
+    modalContainer,
+    input,
+    buttonText, // Added buttonText style for consistent white text
+    modalTitle,
+  } = styles;
+
   return (
-    <View style={styles.container}>
-      <Image style={styles.logo} />
+    <View style={container}>
+      <Image style={logo} />
+      <Image
+        source={Natugle}
+        style={{ width: 250, height: 200, marginTop: -350 }}
+      />
       <TouchableOpacity onPress={handleChangePassword}>
-        <Text style={styles.button}>Change Password</Text>
+        <Text style={[button, buttonText]}>Change password</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={showDeleteAccountConfirmation}>
-        <Text style={styles.button}>Delete Account</Text>
+        <Text style={[button, buttonText]}>Delete account</Text>
       </TouchableOpacity>
       {user && <Button title="Logout" onPress={handleLogout} />}
 
       <Modal isVisible={isChangePasswordModalVisible}>
-        <View style={styles.modalContainer}>
+        <View style={modalContainer}>
+          <Text style={[modalTitle, buttonText]}>Change password</Text>
           <TextInput
             placeholder="New Password"
             value={newPassword}
             onChangeText={(text) => setNewPassword(text)}
-            style={styles.input}
+            style={input}
             secureTextEntry
           />
           <TextInput
             placeholder="Confirm Password"
             value={confirmPassword}
             onChangeText={(text) => setConfirmPassword(text)}
-            style={styles.input}
+            style={input}
             secureTextEntry
           />
-          <Button title="Change Password" onPress={handlePasswordChange} />
-          <Button
-            title="Close"
+          <TouchableOpacity
+            onPress={handlePasswordChange}
+            style={[button, buttonText]}
+          >
+            <Text>Change password</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => setChangePasswordModalVisible(false)}
-          />
+            style={[button, buttonText]}
+          >
+            <Text>Close</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
 
       <Modal isVisible={isDeleteAccountConfirmationModalVisible}>
-        <View style={styles.modalContainer}>
+        <View style={modalContainer}>
+          <Text style={[modalTitle, buttonText]}>Confirm deletion</Text>
           <Text>Are you sure you want to delete your account?</Text>
-          <Button title="Confirm" onPress={confirmDeleteAccount} />
-          <Button
-            title="Cancel"
+          <TouchableOpacity
+            onPress={confirmDeleteAccount}
+            style={[button, buttonText]}
+          >
+            <Text>Confirm</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
             onPress={() => setDeleteAccountConfirmationModalVisible(false)}
-          />
+            style={[button, buttonText]}
+          >
+            <Text>Cancel</Text>
+          </TouchableOpacity>
         </View>
       </Modal>
     </View>
@@ -189,17 +220,41 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 40,
     borderColor: "gray",
-    borderWidth: 1,
+    borderBottomWidth: 1,
     marginBottom: 10,
     padding: 10,
+    fontSize: 16,
+    color: "black",
   },
   button: {
-    color: "blue",
+    backgroundColor: "lightblue",
+    padding: 10,
+    borderRadius: 5,
     marginBottom: 10,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "black",
   },
   modalContainer: {
+    justifyContent: "center",
+    alignItems: "center",
     backgroundColor: "white",
     padding: 20,
     borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 10,
+    color: "white",
   },
 });

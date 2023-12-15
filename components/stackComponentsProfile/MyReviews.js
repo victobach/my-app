@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+/*import { initializeApp } from 'firebase/app';
 import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, Button, StyleSheet, TouchableOpacity } from 'react-native'; // Import TouchableOpacity
 import { getFirestore, doc, getDoc } from 'firebase/firestore/lite';
@@ -96,3 +96,4 @@ const styles = StyleSheet.create({
 });
 
 export default MyReviews;
+*/

@@ -5,7 +5,8 @@ import {
   TextInput,
   Button,
   StyleSheet,
-  Linking, Alert,
+  Linking,
+  Alert,
 } from "react-native";
 import { initializeApp } from "firebase/app";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
@@ -15,7 +16,7 @@ const navController = (navigation, route) => {
 };
 
 export default function Book({ route, navigation }) {
-//confirmation alert
+  //confirmation alert
   const showAlert = () => {
     Alert.alert(
       "Thank you for booking",
@@ -67,7 +68,7 @@ export default function Book({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Reserve a table</Text>
+      <Text style={styles.title}>Reserve a table at {venueName}</Text>
       <TextInput
         placeholder="Number of Guests"
         value={guestNumber}
@@ -87,10 +88,13 @@ export default function Book({ route, navigation }) {
         style={styles.input}
       />
       <View style={styles.buttons}>
-        <Button title="Submit Reservation" onPress={() => {
-        sendDataToFirebase();
-        showAlert();
-    }}  />
+        <Button
+          title="Submit Reservation"
+          onPress={() => {
+            sendDataToFirebase();
+            showAlert();
+          }}
+        />
         <Button title="Back" onPress={() => navigation.goBack()} />
       </View>
     </View>

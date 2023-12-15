@@ -1,16 +1,22 @@
+// Importing the necessary Firebase admin module
 const admin = require("firebase-admin");
+
+// Importing the service account key for Firebase
 const serviceAccount = require("./innovationogtekt-firebase-adminsdk-ec56o-8d9c418cd2.json");
 
+// Initializing Firebase admin with the service account and database URL
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL:
     "https://innovationogtekt-default-rtdb.europe-west1.firebasedatabase.app",
 });
 
+// Creating a Firestore database instance
 const db = admin.firestore();
 
+// Filters for different venue attributes
 const filters = {
-  Address: [], // Add options if needed; validation will not be enforced for Address
+  Address: [], // Options can be added here if needed; no validation for Address
   Area: [
     "København K ",
     "Østerbro ",
@@ -63,6 +69,7 @@ const filters = {
   "Table Service": ["Available", "Not available"],
 };
 
+// Function to validate user input against predefined filters
 function validateInput(value, filterKey) {
   // Skip validation for Address
   if (filterKey === "Address") {
@@ -85,6 +92,7 @@ function validateInput(value, filterKey) {
   }
 }
 
+// Function to add a venue to the Firestore database
 async function addVenue(
   Address,
   Area,
@@ -111,6 +119,7 @@ async function addVenue(
   validateInput(Price, "Price");
   validateInput(TableService, "Table Service");
 
+  // Create a data object for the venue
   const venueData = {
     address: Address,
     Area: Area,
@@ -126,11 +135,12 @@ async function addVenue(
     venueName: VenueName,
   };
 
+  // Add the venue data to the Firestore collection
   await db.collection("VenueList").doc(VenueName).set(venueData);
   console.log(`${VenueName} document created successfully.`);
 }
 
-// Example usage:
+// Example usage of addVenue function with sample data
 addVenue(
   "Emil Holms Kanal 20 ",
   "Østerbro ",
@@ -258,7 +268,7 @@ addVenue(
   "No live music ",
   ["Pop ", "R&B "],
   "Evening (5pm - 10pm) ",
-  "$$ (Moderate) ",
+  "$$$$ (Upscale) ",
   "Available",
   "Cafe det elektriske hjørne "
 );
@@ -273,7 +283,7 @@ addVenue(
   "No live music ",
   ["Pop ", "R&B "],
   "Evening (5pm - 10pm) ",
-  "$$ (Moderate) ",
+  "$$$$ (Upscale) ",
   "Available",
   "Café nexus "
 );
@@ -288,7 +298,7 @@ addVenue(
   "No live music ",
   ["Pop ", "R&B "],
   "Evening (5pm - 10pm) ",
-  "$$ (Moderate) ",
+  "$$$ (Pricey) ",
   "Available",
   "Cafe victor "
 );
@@ -303,7 +313,7 @@ addVenue(
   "No live music ",
   ["Pop ", "R&B "],
   "Evening (5pm - 10pm) ",
-  "$$ (Moderate) ",
+  "$$$ (Pricey) ",
   "Available",
   "Cafe victor "
 );
@@ -318,7 +328,7 @@ addVenue(
   "No live music ",
   ["Pop ", "R&B "],
   "Evening (5pm - 10pm) ",
-  "$$ (Moderate) ",
+  "$ (Budget-friendly) ",
   "Available",
   "Club mambo copenhagen "
 );
@@ -333,7 +343,7 @@ addVenue(
   "No live music ",
   ["Pop ", "R&B "],
   "Evening (5pm - 10pm) ",
-  "$$ (Moderate) ",
+  "$ (Budget-friendly) ",
   "Available",
   "Culture box "
 );

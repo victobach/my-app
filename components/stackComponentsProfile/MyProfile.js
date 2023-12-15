@@ -48,19 +48,31 @@ const MinProfil = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      {/* Centered Header with Name and Owl Emoji */}
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>NightOwl 🦉</Text>
+      </View>
+
+      {/* Invite a friend textbox */}
+      <View style={styles.textBox}>
+        <Text style={styles.textBoxText}>
+          Invite a friend and give them a month free of premium + get a free
+          month yourself. NightOwl 🦉
+        </Text>
+      </View>
+
+      {/* Separator Line */}
+      <View style={styles.separator} />
+
+      {/* Your existing buttons with emojis and lines */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Favorites")}
       >
-        <Text style={styles.buttonText}>My Favorites</Text>
+        <Text style={styles.icon}>🌟</Text>
+        <Text style={styles.buttonTextLarge}>My Favorites</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Reviews")}
-      >
-        <Text style={styles.buttonText}>My Reviews</Text>
-      </TouchableOpacity>
+      <View style={styles.line} />
 
       <TouchableOpacity
         style={styles.button}
@@ -68,8 +80,10 @@ const MinProfil = ({ navigation }) => {
           navigation.navigate("SettingsNavigator", { screen: "Settings" })
         }
       >
-        <Text style={styles.buttonText}>Change my details</Text>
+        <Text style={styles.icon}>⚙️</Text>
+        <Text style={styles.buttonTextLarge}>Edit my profile</Text>
       </TouchableOpacity>
+      <View style={styles.line} />
 
       <TouchableOpacity
         style={styles.button}
@@ -77,8 +91,10 @@ const MinProfil = ({ navigation }) => {
           navigation.navigate("SettingsNavigator", { screen: "Report Bug" })
         }
       >
-        <Text style={styles.buttonText}>Report a bug</Text>
+        <Text style={styles.icon}>🐞</Text>
+        <Text style={styles.buttonTextLarge}>Report a bug</Text>
       </TouchableOpacity>
+      <View style={styles.line} />
 
       <TouchableOpacity
         style={styles.button}
@@ -86,40 +102,61 @@ const MinProfil = ({ navigation }) => {
           navigation.navigate("SettingsNavigator", { screen: "ContactUs" })
         }
       >
-        <Text style={styles.buttonText}>Contact Us</Text>
+        <Text style={styles.icon}>📧</Text>
+        <Text style={styles.buttonTextLarge}>Contact Us</Text>
       </TouchableOpacity>
+
+      {/* Separator Line */}
+      <View style={styles.separator} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  // Styling:
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     padding: 20,
   },
-  button: {
-    backgroundColor: "#007AFF",
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
-  },
-  buttonText: {
-    color: "#FFFFFF",
-    fontSize: 16,
-    fontWeight: "bold",
+  headerContainer: {
+    alignItems: "center",
+    marginTop: 20,
   },
   headerText: {
     fontSize: 24,
     fontWeight: "bold",
-    marginTop: 20,
-    marginBottom: 10,
   },
-  profileText: {
-    fontSize: 18,
-    marginBottom: 5,
+  separator: {
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+    marginVertical: 20,
+  },
+  button: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  icon: {
+    fontSize: 24,
+    marginRight: 10,
+  },
+  buttonTextLarge: {
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  line: {
+    borderBottomColor: "#ccc",
+    borderBottomWidth: 1,
+    marginVertical: 10,
+  },
+  textBox: {
+    backgroundColor: "navy",
+    padding: 10,
+    borderRadius: 8,
+    marginVertical: 20,
+  },
+  textBoxText: {
+    color: "white",
+    fontSize: 16,
   },
 });
 

@@ -8,8 +8,10 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from "react-native";
-import { getFirestore, doc, getDoc, onSnapshot  } from "firebase/firestore";
+import { getFirestore, doc, getDoc, onSnapshot } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useFocusEffect } from '@react-navigation/native';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
@@ -27,52 +29,52 @@ const navController = (navigation, route) => {
 };
 initializeApp(firebaseConfig);
 
-const MyFavorites = ({  route, navigation }) => {
+const MyFavorites = ({ route, navigation }) => {
   const [FavoritesData, setFavoritesData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setIsAuthenticated(true);
-      } else {
+  useFocusEffect(
+    React.useCallback(() => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (!user) {
         navigation.navigate("LoginNavigator", { screen: "Login" });
       }
-    });
-
-    return unsubscribe; // Cleanup subscription on unmount
-  }, [navigation]);
+    }, [navigation])
+  );
 
   useEffect(() => {
     let unsubscribe = () => {};
-  
+
     if (isAuthenticated) {
       const firestore = getFirestore();
       const auth = getAuth();
       const user = auth.currentUser;
-  
+
       if (user) {
         const FavoritesRef = doc(firestore, "userFavorites", user.uid);
-        unsubscribe = onSnapshot(FavoritesRef, (docSnapshot) => {
-          if (docSnapshot.exists()) {
-            setFavoritesData(docSnapshot.data());
-          } else {
-            // Handle the case where the document does not exist
-            console.log("No favorites data found");
+        unsubscribe = onSnapshot(
+          FavoritesRef,
+          (docSnapshot) => {
+            if (docSnapshot.exists()) {
+              setFavoritesData(docSnapshot.data());
+            } else {
+              // Handle the case where the document does not exist
+              console.log("No favorites data found");
+            }
+            setLoading(false);
+          },
+          (error) => {
+            console.error("Error fetching favorites data:", error);
+            setLoading(false);
           }
-          setLoading(false);
-        }, (error) => {
-          console.error("Error fetching favorites data:", error);
-          setLoading(false);
-        });
+        );
       }
     }
-  
+
     return () => unsubscribe(); // Unsubscribe on unmount
   }, [isAuthenticated]);
-  
 
   if (!isAuthenticated || loading) {
     return <ActivityIndicator size="large" />;
@@ -84,16 +86,21 @@ const MyFavorites = ({  route, navigation }) => {
 
   return (
     <View style={styles.container}>
-    {Object.values(FavoritesData).map((item, index) => (
-      <TouchableHighlight
-        style={styles.button}
-        key={index}
-        onPress={() => navigation.navigate("VenueDetails", { venueName: item.venueName, venue: item })}
-      >
-        <Text style={styles.h1}>{item.venueName}</Text>
-      </TouchableHighlight>
-    ))}
-  </View>
+      {Object.values(FavoritesData).map((item, index) => (
+        <TouchableHighlight
+          style={styles.button}
+          key={index}
+          onPress={() =>
+            navigation.navigate("VenueDetails", {
+              venueName: item.venueName,
+              venue: item,
+            })
+          }
+        >
+          <Text style={styles.h1}>{item.venueName}🌟</Text>
+        </TouchableHighlight>
+      ))}
+    </View>
   );
 };
 

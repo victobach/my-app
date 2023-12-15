@@ -1,20 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import QRCode from "react-native-qrcode-svg"; // Import the QRCode component
+import QRCode from "react-native-qrcode-svg";
 
 const SingleProductScreen = (props) => {
   const { route } = props;
   const { reward } = route.params;
 
-  // Ensure reward.code is a valid string or provide a default value
   const qrCodeData = reward.code || "Default QR Code Data";
 
   return (
     <View style={styles.container}>
-      <Text>{reward.name}</Text>
-
-      {/* Display the QR code */}
-      <QRCode value={qrCodeData} size={200} />
+      <Text style={styles.rewardText}>{reward.name}</Text>
+      <View style={styles.qrCodeContainer}>
+        {/* Display the QR code */}
+        <QRCode value={qrCodeData} size={300} />
+      </View>
     </View>
   );
 };
@@ -26,5 +26,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  rewardText: {
+    fontSize: 34, // Set your desired text size
+    textAlign: "center",
+    marginTop: 20, // Adjust this margin to your preference
+  },
+  qrCodeContainer: {
+    marginTop: 40, // Adjust this margin to add space between text and QR code
   },
 });
