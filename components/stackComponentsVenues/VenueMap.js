@@ -3,12 +3,14 @@ import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 
-// navigation router
+// Function for navigating to a specified route
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
+// AllVenues component to display a map with venue markers
 
 export default function AllVenues({ navigation }) {
+  // Array containing venue data (id, name, latitude, longitude)
   const venues = [
     {
       id: 1,
@@ -167,14 +169,14 @@ export default function AllVenues({ navigation }) {
       longitude: 12.573,
     },
   ];
-
+  // Initial region for the map view
   const initialRegion = {
     latitude: 55.66422466427859,
     longitude: 12.541217948608216,
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
-
+  // Render UI components
   return (
     <View style={{ flex: 1 }}>
       <MapView
@@ -215,7 +217,7 @@ export default function AllVenues({ navigation }) {
     </View>
   );
 }
-
+// Styles for the component
 const styles = StyleSheet.create({
   buttonContainer: {
     position: "absolute",

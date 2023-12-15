@@ -177,7 +177,7 @@ addVenue(
   "21+ ",
   "Upscale ",
   "Medium (50-150 people) ",
-  "A-tropical-themed-bar-with-a-wide-selection-of-cocktails ",
+  "A tropical themed bar with a wide selection of cocktails ",
   "Occasionally ",
   ["Pop ", "R&B "],
   "Evening (5pm - 10pm) ",
@@ -270,7 +270,7 @@ addVenue(
   "Evening (5pm - 10pm) ",
   "$$$$ (Upscale) ",
   "Available",
-  "Cafe det elektriske hjørne "
+  "Cafe det Elektriske hjørne "
 );
 
 addVenue(

@@ -64,7 +64,7 @@ const MinProfil = ({ navigation }) => {
       {/* Separator Line */}
       <View style={styles.separator} />
 
-      {/* Your existing buttons with emojis and lines */}
+      {/*  Existing buttons with emojis and lines */}
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("Favorites")}
@@ -112,6 +112,7 @@ const MinProfil = ({ navigation }) => {
   );
 };
 
+// CSS work 
 const styles = StyleSheet.create({
   container: {
     flex: 1,

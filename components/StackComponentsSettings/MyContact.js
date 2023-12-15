@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import { TextInput, View, Text, StyleSheet, TouchableOpacity, Linking } from "react-native";
 import { Ionicons } from "@expo/vector-icons";

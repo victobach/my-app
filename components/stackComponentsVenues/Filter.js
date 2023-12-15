@@ -12,20 +12,29 @@ import {
 import { FilterList } from "../../FilterList"; // Database importeres her
 import FilterOptions from "./FilterOptions";
 
+// Function for navigating to a specified route
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
+
+// Filter component to display a list of filters
 const Filter = ({ navigation }) => {
+  // Array containing filter options
   const arr = FilterList;
 
+  // Function to handle filter press and navigate to FilterOptions screen
   const handleFilterPress = (selectedFilter) => {
     navigation.navigate("FilterOptions", { chosenFilter: selectedFilter });
   };
 
+  // Render UI components
   return (
     <View style={styles.container}>
       <ScrollView>
+        {/* Button to navigate back */}
         <Button title="Back" onPress={() => navigation.goBack()} />
+
+        {/* Mapping through filter options and displaying each as a touchable button */}
         {arr.map((item, index) => (
           <TouchableHighlight
             style={styles.button}
@@ -39,6 +48,8 @@ const Filter = ({ navigation }) => {
     </View>
   );
 };
+
+// Styles for the component
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
@@ -52,4 +63,6 @@ const styles = StyleSheet.create({
     marginBottom: 7,
   },
 });
+
+// Exporting the Filter component as the default export
 export default Filter;

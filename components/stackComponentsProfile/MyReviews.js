@@ -1,3 +1,5 @@
+// Outdated
+
 /*import { initializeApp } from 'firebase/app';
 import React, { useState, useEffect } from 'react';
 import { View, Text, ActivityIndicator, Button, StyleSheet, TouchableOpacity } from 'react-native'; // Import TouchableOpacity

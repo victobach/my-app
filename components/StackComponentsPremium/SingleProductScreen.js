@@ -1,7 +1,8 @@
+// Imports from react module
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import QRCode from "react-native-qrcode-svg";
-
+// Creates the same product/Reward each time based on our premium.js
 const SingleProductScreen = (props) => {
   const { route } = props;
   const { reward } = route.params;

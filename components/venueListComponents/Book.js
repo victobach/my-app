@@ -1,3 +1,4 @@
+// Importing necessary components and functions from React and React Native
 import React, { useState } from "react";
 import {
   View,
@@ -11,12 +12,14 @@ import {
 import { initializeApp } from "firebase/app";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
 
+// Function to navigate to a specified route
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
 
+// Book component
 export default function Book({ route, navigation }) {
-  //confirmation alert
+  // Alert to show a confirmation message after booking
   const showAlert = () => {
     Alert.alert(
       "Thank you for booking",
@@ -26,16 +29,21 @@ export default function Book({ route, navigation }) {
     );
   };
 
+  // Extracting parameters from the route
   const { venueName, venue } = route.params;
+
+  // State variables for input fields
   const [contactName, setContactName] = useState("");
   const [guestNumber, setGuestNumber] = useState("");
   const [contactNumber, setContactNumber] = useState("");
 
+  // Function to make a phone call using the Linking API
   const makePhoneCall = () => {
     const phoneNumber = "+4552410056"; // Replace with the desired phone number
     Linking.openURL(`tel:${phoneNumber}`);
   };
 
+  // Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyBEwykSQwC2GMgWNMdaVWlfvkKjTfc-uXY",
     authDomain: "innovationogtekt.firebaseapp.com",
@@ -48,6 +56,7 @@ export default function Book({ route, navigation }) {
     measurementId: "G-HRRR03JBJL",
   };
 
+  // Function to send data to Firebase
   const sendDataToFirebase = async () => {
     const firestore = getFirestore();
     await setDoc(doc(firestore, "venues", "venue_id"), {
@@ -64,8 +73,10 @@ export default function Book({ route, navigation }) {
     setContactNumber("");
   };
 
+  // Initialize Firebase app
   initializeApp(firebaseConfig);
 
+  // Render UI components
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Reserve a table at {venueName}</Text>
@@ -101,6 +112,7 @@ export default function Book({ route, navigation }) {
   );
 }
 
+// Styles for the component
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -120,22 +132,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
-  phoneNumberLabel: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  phoneNumber: {
-    color: "blue", // Style the phone number as a link
-    fontSize: 18,
-    marginBottom: 20,
-  },
   buttons: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
-  },
-  filters: {
-    marginTop: 20,
-    color: "gray",
   },
 });

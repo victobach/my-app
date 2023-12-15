@@ -1,3 +1,5 @@
+// This screen is outdated
+
 /*import React, { useState, useEffect } from "react";
 import {
   StyleSheet,

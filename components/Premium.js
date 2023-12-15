@@ -1,3 +1,4 @@
+// Importing necessary components from React and React Native
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -7,10 +8,13 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
+// Importing authentication-related functions from Firebase
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+// Function to navigate to a specified route
 const navController = (navigation, route) => {
   navigation.navigate(route);
 };
+// Array containing premium rewards with their details
 const rewards = [
   {
     name: "10% coupon all night",
@@ -67,7 +71,7 @@ const rewards = [
       "https://cdni.iconscout.com/illustration/premium/thumb/unlock-secret-reward-for-investment-opportunity-8135561-6515953.png?f=webp", // Replace with your image path
   },
 ];
-
+// Component for displaying an individual reward item
 function RewardItem({ reward, navigation }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -84,6 +88,7 @@ function RewardItem({ reward, navigation }) {
     return unsubscribe; // Cleanup subscription on unmount
   }, [navigation]);
 
+  // Touchable component for each reward item
   return (
     <TouchableOpacity
       onPress={() => navigation.navigate("Premium_Single_Product", { reward })}
@@ -102,6 +107,7 @@ function RewardItem({ reward, navigation }) {
     </TouchableOpacity>
   );
 }
+// Main component for Premium screen
 
 export default function Premium({ navigation }) {
   return (
@@ -117,6 +123,7 @@ export default function Premium({ navigation }) {
   );
 }
 
+// Styles for the components
 const styles = StyleSheet.create({
   container: {
     flex: 1,
